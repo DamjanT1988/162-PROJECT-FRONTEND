@@ -5,14 +5,12 @@ import './App.css';
 // CHILD COMPONENT: REGISTER
 
 class Register extends React.Component {
-
   render() {
     return (
       <div></div>
-    )
+    );
   }
 }
-
 // END OF REGISTER COMPONENT
 /*******************************************************************************************/
 
@@ -23,27 +21,26 @@ class Login extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: '',
-      password: ''
+      emailUser: '',
+      passwordUser: ''
     };
 
-    this.handleChange = this.handleInputChange.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleInputChange(event) {
     const target = event.target;
-    const email = target.email;
-    const password = target.password;
+    const value = target.value;
+    const name = target.name;
 
     this.setState({
-      [email]: email.value,
-      [password]: password.value
+      [name]: value    
     });
   }
 
   handleSubmit(event) {
-    alert('Email: ' + this.state.email + 'Password: ' + this.state.password);
+    alert('Email: ' + this.state.emailUser +' ' + 'Password: ' + this.state.passwordUser);
     event.preventDefault();
   }
 
@@ -51,35 +48,35 @@ class Login extends React.Component {
     return (
       <form onSubmit={this.handleSubmit}>
         <label>
-          Your email:
+          Your email: 
           <br />
           <input
-            name='email'
+            name="emailUser"            
             type="text"
-            value={this.state.value}
+            checked={this.state.emailUser}
             onChange={this.handleInputChange} />
-          <br />
         </label>
+        <br />
         <label>
-          <br />
           Your password:
-          <br />
+          <br /> 
           <input
-            name='password'
-            type="password"
-            value={this.state.value}
+            name="passwordUser"            
+            type="text"
+            value={this.state.passwordUser}
             onChange={this.handleInputChange} />
         </label>
         <br /><br />
-        <input type="submit" value="Submit" />
+        <input 
+        type="submit" 
+        value="Submit"
+        className="btn btn-dark" />
 
-        {/*ADD LATER*/}
-        <p id="responseLoginFail"></p>
-        <p id="responseLoginSuccess"></p>
       </form>
     );
   }
 }
+
 
 // END OF LOGIN COMPONENT
 /*******************************************************************************************/
@@ -90,9 +87,10 @@ class Login extends React.Component {
 class StartView extends React.Component {
 
   render() {
+    {/*className="row"*/}
     return (
-      <div class="row">
-        <div class="col-md bg-dark bg-gradient text-white p-4">
+      <div>
+        <div className="col-md bg-dark bg-gradient text-white p-4">
 
           <h2>LOG IN</h2>
           <p>
@@ -101,7 +99,7 @@ class StartView extends React.Component {
           <Login />
         </div>
 
-        <div class="col-md bg-dark bg-gradient text-white p-4">
+        <div className="col-md bg-dark bg-gradient text-white p-4">
           <h2>REGISTER</h2>
           <p>
             Register below. Navigate above. The key is used by the employer.
@@ -125,24 +123,6 @@ function App() {
     <StartView />
 
   );
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
 
 export default App;
