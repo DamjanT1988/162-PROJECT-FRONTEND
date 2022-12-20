@@ -27,6 +27,7 @@ class Login extends React.Component {
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.loginUser = this.loginUser.bind(this);
     //this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -41,84 +42,101 @@ class Login extends React.Component {
   }
 
   /*  handleSubmit(event) {
-      //alert('Email: ' + this.state.emailUser + ' ' + 'Password: ' + this.state.passwordUser);
+      alert('Email: ' + this.state.emailUser + ' ' + 'Password: ' + this.state.passwordUser);
       event.preventDefault();
       if (this.state.emailUser.length > 0) {
         //this.loginUser;
       }
     }*/
 
+
   /*
-  loginUser(event) {
+    loginUser(event) {
   
-    event.preventDefault();    
-    let xhr = new XMLHttpRequest();
-    let productBody = {
-      name: "d",
-      email: '44',
-      password: '11'
-    };
-  
-    //open the request
-    xhr.open('POST', 'http://localhost:3000/users')
-    xhr.setRequestHeader("Content-Type", "application/json");
-  
-    //send the form data
-    xhr.send(JSON.stringify(productBody));
-  }
-  */
+      fetch("http://localhost:3000")
+      .then(res => res.json())
+      .then(
+        (result) => {
+          console.log(result);
+        }
+      )
+      }
+      */
 
-  async loginUser1(event) {
-    //prevent reload
-    event.preventDefault();
-    //check if input
-    if (this.state.emailUser.length > 0) {
-      document.getElementById("responseLoginFail").innerHTML = "";
-      document.getElementById("responseLoginSuccess").innerHTML = "";
-
-      //create a JS object
+  /*   
+  event.preventDefault();
+  
+      let xhr = new XMLHttpRequest();
       let productBody = {
-        email: this.state.emailUser,
-        password: this.state.passwordUser
+        name: "d",
+        email: '44',
+        password: '11'
       };
-
-      //fetch("http://localhost:3001/users/").then(req => req.text()).then(console.log)
-
-      //send request to API 
-      const resp = await fetch("http://localhost:3000/users", {
-        method: "POST",
-        headers: {
-          "Accept": "application/json",
-          "Content-type": "application/json",
-          //"Access-Control-Allow-Origin": "http://localhost:3001"
-        },
-
-        //convert JS object to JSON object
-        body: JSON.stringify(productBody)
-      });
+  
+      //open the request
+      xhr.open('POST', 'http://localhost:3000/users/')
+      xhr.setRequestHeader("Content-Type", "application/json");
+  
+      //send the form data
+      xhr.send(JSON.stringify(productBody));
+  
+      return false;
+    }*/
 
 
-      //store response
-      const data = await resp.json();
-      const msg = data.message;
 
-      //check login
-      if (data.token == undefined) {
-        //no value
-        document.cookie = "UserToken=";
-      } else {
-        //add value
-        document.cookie = "UserToken=" + data.token;
-      }
+  async loginUser(event) {
+    //prevent reload
+    //event.preventDefault();
+    //check if input
+    //if (this.state.emailUser.length > 0 || this.state.emailUser !== undefined) {
+    document.getElementById("responseLoginFail").innerHTML = "";
+    document.getElementById("responseLoginSuccess").innerHTML = "";
 
-      if (msg == "Användare inloggad!") {
-        // print message
-        document.getElementById("responseLoginSuccess").innerHTML = "Login success ";
-      } else {
-        document.getElementById("responseLoginFail").innerHTML = "Login fail";
-      }
+    //create a JS object
+    let productBody = {
+      name: "ww",
+      email: this.state.emailUser,
+      password: this.state.passwordUser
+    };
+
+    //fetch("http://localhost:3001/users/").then(req => req.text()).then(console.log)
+
+    //send request to API 
+    const resp = await fetch("http://localhost:3000/users/", {
+      method: "POST",
+      headers: {
+        "Accept": "application/json",
+        "Content-type": "application/json",
+        //"Access-Control-Allow-Origin": "http://localhost:3001"
+      },
+
+      //convert JS object to JSON object
+      body: JSON.stringify(productBody)
+    });
+
+/*
+    //store response
+    const data = resp.json();
+    const msg = data.message;
+
+    //check login
+    if (data.token == undefined) {
+      //no value
+      document.cookie = "UserToken=";
+    } else {
+      //add value
+      document.cookie = "UserToken=" + data.token;
     }
-  }
+
+    if (msg == "Användare inloggad!") {
+      // print message
+      document.getElementById("responseLoginSuccess").innerHTML = "Login success ";
+    } else {
+      document.getElementById("responseLoginFail").innerHTML = "Login fail";
+    }
+    //}
+  */}
 
   render() {
     return (
@@ -129,7 +147,7 @@ class Login extends React.Component {
           <input
             name="emailUser"
             type="text"
-            checked={this.state.emailUser}
+            value={this.state.emailUser}
             onChange={this.handleInputChange} />
         </label>
         <br />
