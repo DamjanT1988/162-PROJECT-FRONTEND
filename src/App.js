@@ -27,7 +27,7 @@ class Login extends React.Component {
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    //this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleInputChange(event) {
@@ -36,23 +36,95 @@ class Login extends React.Component {
     const name = target.name;
 
     this.setState({
-      [name]: value    
+      [name]: value
     });
   }
 
-  handleSubmit(event) {
-    alert('Email: ' + this.state.emailUser +' ' + 'Password: ' + this.state.passwordUser);
+  /*  handleSubmit(event) {
+      //alert('Email: ' + this.state.emailUser + ' ' + 'Password: ' + this.state.passwordUser);
+      event.preventDefault();
+      if (this.state.emailUser.length > 0) {
+        //this.loginUser;
+      }
+    }*/
+
+  /*
+loginUser(event) {
+
+  event.preventDefault();    
+  let xhr = new XMLHttpRequest();
+  let productBody = {
+    name: "d",
+    email: '44',
+    password: '11'
+  };
+
+  //open the request
+  xhr.open('POST', 'http://localhost:3000/users')
+  xhr.setRequestHeader("Content-Type", "application/json");
+
+  //send the form data
+  xhr.send(JSON.stringify(productBody));
+}
+*/
+
+  async loginUser(event) {
+    // kontroll att något fylls i
     event.preventDefault();
+    //if (this.state.emailUser.length > 0) {
+    document.getElementById("responseLoginFail").innerHTML = "";
+    document.getElementById("responseLoginSuccess").innerHTML = "";
+
+    // skapa en JS-objekt att skicka med
+    let productBody = {
+      name: "d",
+      email: '44',
+      password: '11'
+    };
+
+    // skicka till API
+    const resp = await fetch("http://localhost:3000/users", {
+      method: "POST",
+      headers: {
+        "Accept": "application/json",
+        "Content-type": "application/json"
+      },
+
+      // omvandla JS-objekt till JSON
+      body: JSON.stringify(productBody)
+    });
+    /*
+        // lagra svar
+        const data = await resp.json();
+        const msg = data.message;
+    
+        //kolla om lyckad inlogg med token
+        if (data.token == undefined) {
+          //inget värde
+          document.cookie = "UserToken=";
+        } else {
+          //sätt värde
+          document.cookie = "UserToken=" + data.token;
+        }
+    
+        if (msg == "Användare inloggad!") {
+          // skriv ut meddelande
+          document.getElementById("responseLoginSuccess").innerHTML = data.message;
+        } else {
+          document.getElementById("responseLoginFail").innerHTML = data.message;
+        }
+      */
+    //}
   }
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form onSubmit={this.loginUser}>
         <label>
-          Your email: 
+          Your email:
           <br />
           <input
-            name="emailUser"            
+            name="emailUser"
             type="text"
             checked={this.state.emailUser}
             onChange={this.handleInputChange} />
@@ -60,19 +132,21 @@ class Login extends React.Component {
         <br />
         <label>
           Your password:
-          <br /> 
+          <br />
           <input
-            name="passwordUser"            
-            type="text"
+            name="passwordUser"
+            type="password"
             value={this.state.passwordUser}
             onChange={this.handleInputChange} />
         </label>
         <br /><br />
-        <input 
-        type="submit" 
-        value="Submit"
-        className="btn btn-dark" />
+        <input
+          type="submit"
+          value="Log in!"
+          className="btn btn-dark" />
 
+        <p id="responseLoginFail"></p>
+        <p id="responseLoginSuccess"></p>
       </form>
     );
   }
@@ -88,7 +162,7 @@ class Login extends React.Component {
 class StartView extends React.Component {
 
   render() {
-    {/*className="row"*/}
+    {/*className="row"*/ }
     return (
       <div>
         <div className="col-md bg-dark bg-gradient text-white p-4">
