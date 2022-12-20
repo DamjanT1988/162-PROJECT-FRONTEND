@@ -49,74 +49,75 @@ class Login extends React.Component {
     }*/
 
   /*
-loginUser(event) {
-
-  event.preventDefault();    
-  let xhr = new XMLHttpRequest();
-  let productBody = {
-    name: "d",
-    email: '44',
-    password: '11'
-  };
-
-  //open the request
-  xhr.open('POST', 'http://localhost:3000/users')
-  xhr.setRequestHeader("Content-Type", "application/json");
-
-  //send the form data
-  xhr.send(JSON.stringify(productBody));
-}
-*/
-
-  async loginUser(event) {
-    // kontroll att något fylls i
-    event.preventDefault();
-    //if (this.state.emailUser.length > 0) {
-    document.getElementById("responseLoginFail").innerHTML = "";
-    document.getElementById("responseLoginSuccess").innerHTML = "";
-
-    // skapa en JS-objekt att skicka med
+  loginUser(event) {
+  
+    event.preventDefault();    
+    let xhr = new XMLHttpRequest();
     let productBody = {
       name: "d",
       email: '44',
       password: '11'
     };
+  
+    //open the request
+    xhr.open('POST', 'http://localhost:3000/users')
+    xhr.setRequestHeader("Content-Type", "application/json");
+  
+    //send the form data
+    xhr.send(JSON.stringify(productBody));
+  }
+  */
 
-    // skicka till API
-    const resp = await fetch("http://localhost:3000/users", {
-      method: "POST",
-      headers: {
-        "Accept": "application/json",
-        "Content-type": "application/json"
-      },
+  async loginUser1(event) {
+    //prevent reload
+    event.preventDefault();
+    //check if input
+    if (this.state.emailUser.length > 0) {
+      document.getElementById("responseLoginFail").innerHTML = "";
+      document.getElementById("responseLoginSuccess").innerHTML = "";
 
-      // omvandla JS-objekt till JSON
-      body: JSON.stringify(productBody)
-    });
-    
-    console.log(resp);
-    /*
-        // lagra svar
-        const data = await resp.json();
-        const msg = data.message;
-    
-        //kolla om lyckad inlogg med token
-        if (data.token == undefined) {
-          //inget värde
-          document.cookie = "UserToken=";
-        } else {
-          //sätt värde
-          document.cookie = "UserToken=" + data.token;
-        }
-    
-        if (msg == "Användare inloggad!") {
-          // skriv ut meddelande
-          document.getElementById("responseLoginSuccess").innerHTML = data.message;
-        } else {
-          document.getElementById("responseLoginFail").innerHTML = data.message;
-        }
-      */
-    //}
+      //create a JS object
+      let productBody = {
+        email: this.state.emailUser,
+        password: this.state.passwordUser
+      };
+
+      //fetch("http://localhost:3001/users/").then(req => req.text()).then(console.log)
+
+      //send request to API 
+      const resp = await fetch("http://localhost:3000/users", {
+        method: "POST",
+        headers: {
+          "Accept": "application/json",
+          "Content-type": "application/json",
+          //"Access-Control-Allow-Origin": "http://localhost:3001"
+        },
+
+        //convert JS object to JSON object
+        body: JSON.stringify(productBody)
+      });
+
+
+      //store response
+      const data = await resp.json();
+      const msg = data.message;
+
+      //check login
+      if (data.token == undefined) {
+        //no value
+        document.cookie = "UserToken=";
+      } else {
+        //add value
+        document.cookie = "UserToken=" + data.token;
+      }
+
+      if (msg == "Användare inloggad!") {
+        // print message
+        document.getElementById("responseLoginSuccess").innerHTML = "Login success ";
+      } else {
+        document.getElementById("responseLoginFail").innerHTML = "Login fail";
+      }
+    }
   }
 
   render() {
@@ -162,7 +163,7 @@ loginUser(event) {
 // PARENT COMPONENT: STARTVIEW
 
 class StartView extends React.Component {
-/*className="row"*/
+  /*className="row"*/
   render() {
     return (
       <div>
