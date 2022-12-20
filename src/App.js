@@ -93,6 +93,8 @@ loginUser(event) {
       // omvandla JS-objekt till JSON
       body: JSON.stringify(productBody)
     });
+    
+    console.log(resp);
     /*
         // lagra svar
         const data = await resp.json();
@@ -160,9 +162,8 @@ loginUser(event) {
 // PARENT COMPONENT: STARTVIEW
 
 class StartView extends React.Component {
-
+/*className="row"*/
   render() {
-    {/*className="row"*/ }
     return (
       <div>
         <div className="col-md bg-dark bg-gradient text-white p-4">
