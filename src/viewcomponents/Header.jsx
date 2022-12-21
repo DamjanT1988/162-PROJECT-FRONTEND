@@ -1,32 +1,47 @@
-import ReactDOM from 'react-dom/client';
-import { BrowserRouter, Route, Link } from "react-router-dom";
+import React from 'react';
+import { Link } from "react-router-dom";
 
-function Navbar() {
-  return (
+//logout
+function handleLogout() {
+    //delete cookie value
+    document.cookie = 'UserToken=';
+    document.getElementById("header").innerHTML = "";
+};
 
-    <header className="row">
-        <div>
-            <br/><br/><br/><br/>
 
-            <nav className="navbar fixed-top navbar-dark bg-dark bg-gradient d-flex justify-content-center">
+class Header extends React.Component {
+    //on load
+    componentDidMount() {
+        //check if a cookie value exist/logged in user
+        if (document.cookie === 'UserToken=' || document.cookie === '') {
+            document.getElementById("header").innerHTML = "";
+        }
+    }
 
-                <a id="start">
-                    <Link to="/" className="m-1 btn btn-light text-decoration-none">START</Link>
-                </a>
-                <a id="add">
-                    <Link to="/Add" className="m-1 btn btn-light text-decoration-none">ADD</Link>
-                </a>
-                <a id="manage">
-                    <Link to="/Edit" className="m-1 btn btn-light text-decoration-none">EDIT</Link>
-                </a>
-                <a id="logout" className="m-1">
-                    LOGOUT?
-                </a>
-            </nav>
-        </div>
-    </header>
-
-  );
+    render() {
+        return false
+    }
 }
 
-export default Navbar;
+//main menu
+function Navbar() {
+
+    return (
+        <header id="header" className="row">
+            <div>
+                <Header />
+                <br /><br /><br /><br />
+                <nav className="navbar fixed-top navbar-dark bg-dark bg-gradient d-flex justify-content-center">
+                    <Link to="/" className="m-1 btn btn-light text-decoration-none">START</Link>
+                    <Link to="/Add" className="m-1 btn btn-light text-decoration-none">ADD</Link>
+                    <Link to="/Edit" className="m-1 btn btn-light text-decoration-none">EDIT</Link>
+                    <Link to="/" id="logout" className="m-1 btn btn-light text-decoration-none" onClick={handleLogout}>LOGOUT</Link>
+
+                </nav>
+            </div>
+        </header>
+
+    );
+}
+
+export default Navbar;

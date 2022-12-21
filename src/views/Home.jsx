@@ -257,7 +257,6 @@ class Login extends React.Component {
 
         //create a JS object
         let userBody = {
-            //name: "ww",
             email: this.state.emailUser,
             password: this.state.passwordUser
         };
@@ -290,28 +289,32 @@ class Login extends React.Component {
             this.setState({[this.state.passwordUser]:' '})
         */
 
+
+        //store response
+        const data = "63a204c0939718e70dae83c0";
+        const msg = data.message;
+
+        //test
+        document.cookie = "UserToken=" + data;
+
         /*
-            //store response
-            const data = resp.json();
-            const msg = data.message;
-        
-            //check login
-            if (data.token == undefined) {
-              //no value
-              document.cookie = "UserToken=";
-            } else {
-              //add value
-              document.cookie = "UserToken=" + data.token;
-            }
-        
-            if (msg == "Användare inloggad!") {
-              // print message
-              document.getElementById("responseLoginSuccess").innerHTML = "Login success ";
-            } else {
-              document.getElementById("responseLoginFail").innerHTML = "Login fail";
-            }
-            //}
-          */
+        //check login
+        if (data.token == undefined) {
+          //no value
+          document.cookie = "UserToken=";
+        } else {
+          //add value
+          document.cookie = "UserToken=" + data.token;
+        }
+    
+        if (msg == "Användare inloggad!") {
+          // print message
+          document.getElementById("responseLoginSuccess").innerHTML = "Login success ";
+        } else {
+          document.getElementById("responseLoginFail").innerHTML = "Login fail";
+        }
+        //}
+      */
 
 
     }

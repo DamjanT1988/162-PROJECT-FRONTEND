@@ -331,6 +331,15 @@ class AddProducts extends React.Component {
 
 class AddView extends React.Component {
   /*className="row"*/
+
+  componentDidmounted() {
+
+    if (document.cookie == "UserToken=") {
+        console.log("routed");
+        //this.$router.push({ name: 'start' })
+    }
+}
+
   render() {
     return (
       <div>
