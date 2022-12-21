@@ -1,5 +1,4 @@
 import React from 'react';
-import '../style/bootstrap.min.css'
 
 /*******************************************************************************************/
 // CHILD COMPONENT: REGISTER
@@ -367,10 +366,9 @@ class Login extends React.Component {
 // PARENT COMPONENT: STARTVIEW
 
 class StartView extends React.Component {
-    /*className="row"*/
     render() {
         return (
-            <div>
+            <div className="row">
                 <div className="col-md bg-dark bg-gradient text-white p-4">
 
                     <h2>LOG IN</h2>
