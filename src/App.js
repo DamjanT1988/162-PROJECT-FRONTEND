@@ -237,7 +237,7 @@ class Login extends React.Component {
   //log in the user
   async loginUser(event) {
     //prevent reload
-    //event.preventDefault();
+    event.preventDefault();
     //check if input
     //if (this.state.emailUser.length > 0 || this.state.emailUser !== undefined) {
     document.getElementById("responseLoginFail").innerHTML = "";
@@ -258,7 +258,7 @@ class Login extends React.Component {
       headers: {
         "Accept": "application/json",
         "Content-type": "application/json",
-        //"Access-Control-Allow-Origin": "http://localhost:3001"
+        //"Access-Control-Allow-Origin": 'http://127.0.0.1:8080'
       },
 
       //convert JS object to JSON object
