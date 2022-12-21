@@ -1,9 +1,18 @@
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Route, Link } from "react-router-dom";
+import logo from '../assets/MGG-logotype.jpg';
 
 function Footer() {
   return (
-<p>Developed by Damjan Tosic @ MIUN 2022</p>
+
+    <div className="text-center font-weight-bolder">
+        
+    <img src={logo} className="img-fluid" />
+    <br />
+    Created by Damjan Tosic @ MIUN 2022
+    <br /><br /><br />
+</div>
+
       );
 }
 
