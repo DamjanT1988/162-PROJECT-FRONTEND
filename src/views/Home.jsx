@@ -1,5 +1,5 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom'
+import '../style/bootstrap.min.css'
 
 /*******************************************************************************************/
 // CHILD COMPONENT: REGISTER
