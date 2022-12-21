@@ -1,5 +1,6 @@
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Route, Link } from "react-router-dom";
+import { Button } from 'react-bootstrap';
 
 function Navbar() {
   return (
@@ -10,18 +11,18 @@ function Navbar() {
 
             <nav className="navbar fixed-top navbar-dark bg-dark bg-gradient d-flex justify-content-center">
 
-                <a id="start">
+                <Button id="start">
                     <Link to="/" className="m-1 btn btn-light text-decoration-none">START</Link>
-                </a>
-                <a id="add">
+                </Button>
+                <Button id="add">
                     <Link to="/Add" className="m-1 btn btn-light text-decoration-none">ADD</Link>
-                </a>
-                <a id="manage">
+                </Button>
+                <Button id="manage">
                     <Link to="/Edit" className="m-1 btn btn-light text-decoration-none">EDIT</Link>
-                </a>
-                <a id="logout" className="m-1">
-                    LOGOUT?
-                </a>
+                </Button>
+                <Button id="logout" className="m-1">
+                LOGOUT!
+                </Button>
             </nav>
         </div>
     </header>
