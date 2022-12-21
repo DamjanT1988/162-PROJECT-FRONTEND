@@ -148,7 +148,7 @@ class Register extends React.Component {
         <br /><br />
         <input
           type="submit"
-          value="Log in!"
+          value="Register!"
           className="btn btn-dark" />
 
         <p id="responseLoginFail"></p>
