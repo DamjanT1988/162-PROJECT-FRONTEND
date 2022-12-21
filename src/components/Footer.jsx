@@ -12,7 +12,6 @@ function Footer() {
     Created by Damjan Tosic @ MIUN 2022
     <br /><br /><br />
 </div>
-
       );
 }
 
