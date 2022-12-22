@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 function handleLogout() {
     //delete cookie value
     document.cookie = 'UserToken=';
+    //hide menu
     document.getElementById("header").innerHTML = "";
 };
 
@@ -35,7 +36,7 @@ function Navbar() {
                     <Link to="/" className="m-1 btn btn-light text-decoration-none">START</Link>
                     <Link to="/Add" className="m-1 btn btn-light text-decoration-none">ADD</Link>
                     <Link to="/Edit" className="m-1 btn btn-light text-decoration-none">EDIT</Link>
-                    <Link to="/" id="logout" className="m-1 btn btn-light text-decoration-none" onClick={handleLogout}>LOGOUT</Link>
+                    <Link to="/" id="logout" className="m-1 btn btn-danger text-decoration-none" onClick={handleLogout}>LOGOUT</Link>
 
                 </nav>
             </div>

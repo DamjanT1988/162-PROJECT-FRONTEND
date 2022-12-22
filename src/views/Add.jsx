@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from "react-router-dom";
 
 /*******************************************************************************************/
 // CHILD COMPONENT: PRODUCTSLIST
@@ -7,7 +8,7 @@ class ProductsList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      nameUser:'',
+      nameUser: '',
       emailUser: '',
       passwordUser: '',
       keyUser: ''
@@ -41,7 +42,7 @@ class ProductsList extends React.Component {
     //create a JS object
     let keyBody = {
       key: this.state.keyUser,
-     };
+    };
 
     //send request to API 
     const respKey = await fetch("http://localhost:3000/keys/", {
@@ -57,27 +58,27 @@ class ProductsList extends React.Component {
     });
 
     //check if input key macthes with first database key
-    if (respKey[0]._id == this.state.userKey){
+    if (respKey[0]._id == this.state.userKey) {
 
-    //create a JS object
-    let userBody = {
-      name: this.state.nameUser,
-      email: this.state.emailUser,
-      password: this.state.passwordUser
-    };
+      //create a JS object
+      let userBody = {
+        name: this.state.nameUser,
+        email: this.state.emailUser,
+        password: this.state.passwordUser
+      };
 
-    //send request to API 
-    const resp = await fetch("http://localhost:3000/users/", {
-      method: "POST",
-      headers: {
-        "Accept": "application/json",
-        "Content-type": "application/json",
-        //"Access-Control-Allow-Origin": "http://localhost:3001"
-      },
+      //send request to API 
+      const resp = await fetch("http://localhost:3000/users/", {
+        method: "POST",
+        headers: {
+          "Accept": "application/json",
+          "Content-type": "application/json",
+          //"Access-Control-Allow-Origin": "http://localhost:3001"
+        },
 
-      //convert JS object to JSON object
-      body: JSON.stringify(userBody)
-    });
+        //convert JS object to JSON object
+        body: JSON.stringify(userBody)
+      });
 
 /*
     //store response
@@ -101,7 +102,7 @@ class ProductsList extends React.Component {
     }
     //}
   */}
-}
+  }
 
   render() {
     return (
@@ -330,19 +331,22 @@ class AddProducts extends React.Component {
 // PARENT COMPONENT: STARTVIEW
 
 class AddView extends React.Component {
-  /*className="row"*/
 
-  componentDidmounted() {
-
-    if (document.cookie == "UserToken=") {
-        console.log("routed");
-        //this.$router.push({ name: 'start' })
+  //on load
+  componentDidMount() {
+    //check if a cookie value exist/logged in user
+    if (document.cookie === 'UserToken=' || document.cookie === '') {
+      //if no logged in, route to start page
+      const YourComponent = () => {
+        const navigate = useNavigate();
+         navigate("/");
+        }
     }
-}
+  }
 
   render() {
     return (
-      <div>
+      <div className="row">
         <div className="col-md bg-dark bg-gradient text-white p-4">
 
           <h2>ADD PRODUCT</h2>
@@ -377,4 +381,4 @@ function Add() {
 }
 
 
-export default Add;
+export default Add;

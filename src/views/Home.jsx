@@ -297,6 +297,9 @@ class Login extends React.Component {
         //test
         document.cookie = "UserToken=" + data;
 
+        //reload page for header to appear
+        window.location.reload(false);
+
         /*
         //check login
         if (data.token == undefined) {
