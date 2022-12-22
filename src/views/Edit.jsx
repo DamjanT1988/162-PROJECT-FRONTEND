@@ -1,5 +1,4 @@
 import React from 'react';
-import { BrowserRouter, Route/*useNavigate, withRouter, useHistory, Redirect*/ } from "react-router-dom";
 
 /*******************************************************************************************/
 // CHILD COMPONENT: PRODUCTS
@@ -40,29 +39,30 @@ class EditView extends React.Component {
         //check if a cookie value exist/logged in user
         if (document.cookie === 'UserToken=' || document.cookie === '') {
             window.location = '/';
+        } else {
+            //render if token has value
+            return (
+                <div className="row">
+                    <div className="col-md bg-dark bg-gradient text-white p-4">
+
+                        <h2>EDIT PRODUCT</h2>
+                        <p>
+
+                        </p>
+                        <EditProducts />
+                    </div>
+
+                    <div className="col-md bg-dark bg-gradient text-white p-4">
+                        <h2>PRODUCT LIST</h2>
+                        <p>
+
+                        </p>
+                        <Products />
+                    </div>
+                </div>
+
+            )
         }
-
-        return (
-            <div className="row">
-                <div className="col-md bg-dark bg-gradient text-white p-4">
-
-                    <h2>EDIT PRODUCT</h2>
-                    <p>
-
-                    </p>
-                    <EditProducts />
-                </div>
-
-                <div className="col-md bg-dark bg-gradient text-white p-4">
-                    <h2>PRODUCT LIST</h2>
-                    <p>
-
-                    </p>
-                    <Products />
-                </div>
-            </div>
-
-        )
     }
 }
 

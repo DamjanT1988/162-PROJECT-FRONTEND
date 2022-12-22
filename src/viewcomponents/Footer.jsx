@@ -1,5 +1,4 @@
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter, Route, Link } from "react-router-dom";
 import logo from '../assets/MGG-logotype.jpg';
 
 function Footer() {

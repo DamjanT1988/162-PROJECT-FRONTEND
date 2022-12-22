@@ -1,6 +1,4 @@
 import React from 'react';
-import { useNavigate } from "react-router-dom";
-
 /*******************************************************************************************/
 // CHILD COMPONENT: PRODUCTSLIST
 
@@ -332,40 +330,33 @@ class AddProducts extends React.Component {
 
 class AddView extends React.Component {
 
-  //on load
-  componentDidMount() {
+  render() {
     //check if a cookie value exist/logged in user
     if (document.cookie === 'UserToken=' || document.cookie === '') {
-      //if no logged in, route to start page
-      const YourComponent = () => {
-        const navigate = useNavigate();
-         navigate("/");
-        }
+      window.location = '/';
+    } else {
+      //render if token has value
+      return (
+        <div className="row">
+          <div className="col-md bg-dark bg-gradient text-white p-4">
+
+            <h2>ADD PRODUCT</h2>
+            <p>
+
+            </p>
+            <AddProducts />
+          </div>
+
+          <div className="col-md bg-dark bg-gradient text-white p-4">
+            <h2>PRODUCT LIST</h2>
+            <p>
+
+            </p>
+            <ProductsList />
+          </div>
+        </div>
+      )
     }
-  }
-
-  render() {
-    return (
-      <div className="row">
-        <div className="col-md bg-dark bg-gradient text-white p-4">
-
-          <h2>ADD PRODUCT</h2>
-          <p>
-
-          </p>
-          <AddProducts />
-        </div>
-
-        <div className="col-md bg-dark bg-gradient text-white p-4">
-          <h2>PRODUCT LIST</h2>
-          <p>
-
-          </p>
-          <ProductsList />
-        </div>
-      </div>
-
-    )
   }
 }
 
