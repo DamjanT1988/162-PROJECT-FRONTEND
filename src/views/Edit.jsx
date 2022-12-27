@@ -1,19 +1,5 @@
 import React from 'react';
-
-/*******************************************************************************************/
-// CHILD COMPONENT: PRODUCTS
-
-class ListProducts extends React.Component {
-    render() {
-        return (
-            <div></div>
-        );
-    }
-}
-
-// END OF PRODUCTS COMPONENT
-/*******************************************************************************************/
-
+import ListProducts from '../subcomponents/ListProducts';
 
 /*******************************************************************************************/
 // CHILD COMPONENT: EDIT

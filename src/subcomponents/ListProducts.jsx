@@ -1,6 +1,6 @@
 import React from 'react';
 /*******************************************************************************************/
-// CHILD COMPONENT: PRODUCTSLIST
+// CHILD SUBCOMPONENT: PRODUCTSLIST
 
 class ListProductsClass extends React.Component {
     constructor(props) {
@@ -150,7 +150,7 @@ class ListProductsClass extends React.Component {
     }
   }
   
-  // END OF PRODUCTSLIST COMPONENT
+  // END OF PRODUCTSLIST SUBCOMPONENT
   /*******************************************************************************************/
   
   function ListProducts() {
