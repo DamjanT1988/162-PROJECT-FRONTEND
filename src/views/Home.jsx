@@ -376,7 +376,6 @@ class StartView extends React.Component {
         return (
             <div className="row">
                 <div className="col-md bg-dark bg-gradient text-white p-4">
-
                     <h2>LOG IN</h2>
                     <p>
                         Log in below, then navigate through the buttons in top.

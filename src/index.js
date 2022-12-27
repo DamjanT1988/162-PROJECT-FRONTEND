@@ -11,8 +11,8 @@ export default function App() {
       <Routes>
         <Route path="/" element={<ViewLayout />}>
           <Route index element={<Home />} />
-          <Route path="add" element={<Add />} />
-          <Route path="edit" element={<Edit />} />
+          <Route path="/Add" element={<Add />} />
+          <Route path="/Edit" element={<Edit />} />
         </Route>
       </Routes>
     </BrowserRouter>

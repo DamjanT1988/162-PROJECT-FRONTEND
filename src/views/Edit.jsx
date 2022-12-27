@@ -3,7 +3,7 @@ import React from 'react';
 /*******************************************************************************************/
 // CHILD COMPONENT: PRODUCTS
 
-class Products extends React.Component {
+class ListProducts extends React.Component {
     render() {
         return (
             <div></div>
@@ -22,7 +22,25 @@ class EditProducts extends React.Component {
 
     render() {
         return (
-            <div></div>
+            <form>
+                <input 
+                    id="searchbar" 
+                    type="text" 
+                    name="search" 
+                    className="form-control-lg" 
+                    placeholder="key word" />
+                <br /><br />
+                <input 
+                    type="submit"   
+                    className="btn btn-dark" 
+                    value="Search in list!" />
+                <br />
+                <input 
+                    type="submit"
+                    value="Reload list!"
+                    class="btn btn-dark" />
+                <br />
+            </form>
         );
     }
 }
@@ -57,7 +75,7 @@ class EditView extends React.Component {
                         <p>
 
                         </p>
-                        <Products />
+                        <ListProducts />
                     </div>
                 </div>
 

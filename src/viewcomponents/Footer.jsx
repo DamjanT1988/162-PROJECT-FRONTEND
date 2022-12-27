@@ -7,7 +7,7 @@ function Footer() {
     <div className="text-center font-weight-bolder">
     <img src={logo} className="img-fluid" />
     <br />
-    Created by Damjan Tosic @ MIUN 2022
+    <p>Created by Damjan Tosic @ MIUN 2022</p>
     <br /><br /><br />
 </div>
       );
