@@ -282,7 +282,7 @@ class EditView extends React.Component {
                     </div>
 
                     <div className="col-md bg-dark bg-gradient text-white p-4">
-                        <h2>PRODUCT LIST</h2>
+                        <h2>ALL PRODUCTS VIEW</h2>
                         <p>
                             Search a product by any key word (like product name or #1 article number) and view the result below; or view the whole list
                             below without search; reload to search the whole list again:
