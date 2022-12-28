@@ -50,32 +50,33 @@ class AddProducts extends React.Component {
 
       console.log(productBody)
 
-      /*
+      
 const resp = await fetch("http://localhost:3000/products/", {
 method: "POST",
 headers: {
   "Accept": "application/json",
-  "Content-type": "application/json"
+  "Content-type": "application/json",
+  "Access-Control-Allow-Origin": 'http://127.0.0.1:8080'
 },
+mode: 'cors',
 // omvandla JS-objekt till JSON
 body: JSON.stringify(productBody)
-});*/
-
-      this.setState({
-        product_title: "",
-        ean_number: "",
-        product_description: "",
-        price: "",
-        amount_storage: "",
-        expiration_date: ""
-      })
-
+});
       document.getElementById("messageError").innerHTML = ""
       document.getElementById("messageAdd").innerHTML = "Product added!"
     } else {
 
       document.getElementById("messageError").innerHTML = "Title/EAN number must be filled"
     }
+    
+    this.setState({
+      product_title: "",
+      ean_number: "",
+      product_description: "",
+      price: "",
+      amount_storage: "",
+      expiration_date: ""
+    })
   }
 
 

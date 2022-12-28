@@ -190,7 +190,6 @@ class Login extends React.Component {
         //bind methods/functions
         this.handleInputChange = this.handleInputChange.bind(this);
         this.loginUser = this.loginUser.bind(this);
-        //this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     //save the input value and update state
@@ -203,48 +202,6 @@ class Login extends React.Component {
             [name]: value
         });
     }
-
-    /*  handleSubmit(event) {
-        alert('Email: ' + this.state.emailUser + ' ' + 'Password: ' + this.state.passwordUser);
-        event.preventDefault();
-        if (this.state.emailUser.length > 0) {
-          //this.loginUser;
-        }
-      }*/
-
-
-    /*
-      loginUser(event) {
-    
-        fetch("http://localhost:3000")
-        .then(res => res.json())
-        .then(
-          (result) => {
-            console.log(result);
-          }
-        )
-        }
-        */
-
-    /*   
-    event.preventDefault();
-    
-        let xhr = new XMLHttpRequest();
-        let productBody = {
-          name: "d",
-          email: '44',
-          password: '11'
-        };
-    
-        //open the request
-        xhr.open('POST', 'http://localhost:3000/users/')
-        xhr.setRequestHeader("Content-Type", "application/json");
-    
-        //send the form data
-        xhr.send(JSON.stringify(productBody));
-    
-        return false;
-      }*/
 
     //log in the user
     async loginUser(event) {
@@ -278,18 +235,10 @@ class Login extends React.Component {
      */
 
         //clear form
-        document.getElementById("emailUser").value = "";
-        document.getElementById("passwordUser").value = "";
+        //document.getElementById("emailUser").value = "";
+        //document.getElementById("passwordUser").value = "";
 
-
-        /*
-            this.setState({
-                [this.state.emailUser]:' '
-            })
-            this.setState({[this.state.passwordUser]:' '})
-        */
-
-
+    
         //store response
         const data = "63a204c0939718e70dae83c0";
         const msg = data.message;
@@ -319,13 +268,7 @@ class Login extends React.Component {
         //}
       */
 
-
     }
-    /*
-    redirect () {
-        this.props.push('/Add')
-        //return <Redirect to='/Add' />
-    }*/
 
     render() {
         return (

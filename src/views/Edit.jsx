@@ -153,21 +153,21 @@ class EditProducts extends React.Component {
       body: JSON.stringify(productBody)
       });*/
 
-            this.setState({
-                product_title: "",
-                ean_number: "",
-                product_description: "",
-                price: "",
-                amount_storage: "",
-                expiration_date: ""
-            })
-
             document.getElementById("messageError").innerHTML = ""
             document.getElementById("messageAdd").innerHTML = "Product added!"
         } else {
 
             document.getElementById("messageError").innerHTML = "Title/EAN number must be filled"
         }
+
+        this.setState({
+            product_title: "",
+            ean_number: "",
+            product_description: "",
+            price: "",
+            amount_storage: "",
+            expiration_date: ""
+        })
     }
 
 
