@@ -9,18 +9,27 @@ class AddProducts extends React.Component {
     super(props);
     //set initial state
     this.state = {
-      emailUser: '',
-      passwordUser: ''
+      product_title: '',
+      ean_number: '',
+      product_description: '',
+      price: '',
+      amount_storage: '',
+      expiration_date: ''
     };
 
     //bind methods/functions
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.loginUser = this.loginUser.bind(this);
-    //this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleEvent = this.handleEvent.bind(this);
+    this.addProduct = this.addProduct.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   //save the input value and update state
-  handleInputChange(event) {
+
+  handleEvent(event) {
+    /*this.setState({
+      product_title: event.target.product_title.value,
+      ean_number: event.target.ean_number.value
+    });*/
     const target = event.target;
     const value = target.value;
     const name = target.name;
@@ -30,105 +39,143 @@ class AddProducts extends React.Component {
     });
   }
 
-  /*  handleSubmit(event) {
-      alert('Email: ' + this.state.emailUser + ' ' + 'Password: ' + this.state.passwordUser);
-      event.preventDefault();
-      if (this.state.emailUser.length > 0) {
-        //this.loginUser;
-      }
-    }*/
 
-
-  /*
-    loginUser(event) {
-  
-      fetch("http://localhost:3000")
-      .then(res => res.json())
-      .then(
-        (result) => {
-          console.log(result);
-        }
-      )
-      }
-      */
-
-  /*   
-  event.preventDefault();
-  
-      let xhr = new XMLHttpRequest();
-      let productBody = {
-        name: "d",
-        email: '44',
-        password: '11'
-      };
-  
-      //open the request
-      xhr.open('POST', 'http://localhost:3000/users/')
-      xhr.setRequestHeader("Content-Type", "application/json");
-  
-      //send the form data
-      xhr.send(JSON.stringify(productBody));
-  
-      return false;
-    }*/
-
-  //log in the user
-  async loginUser(event) {
-    //prevent reload
+  handleSubmit(event) {
+    alert('Title: ' + this.state.product_title + ' ' + 'Number: ' + this.state.ean_number);
     event.preventDefault();
-    //check if input
-    //if (this.state.emailUser.length > 0 || this.state.emailUser !== undefined) {
-    document.getElementById("responseLoginFail").innerHTML = "";
-    document.getElementById("responseLoginSuccess").innerHTML = "";
+  }
 
-    //create a JS object
-    let userBody = {
-      //name: "ww",
-      email: this.state.emailUser,
-      password: this.state.passwordUser
-    };
+  async addProduct() {
+   
+    // kontroll att något fylls i
+    if (this.state.product_title.length > 0 && this.state.ean_number > 0) {
 
-    //fetch("http://localhost:3001/users/").then(req => req.text()).then(console.log)
+      // skapa en JS-objekt att skicka med
+      let productBody = {
+        product_title: this.state.product_title,
+        ean_number: this.state.ean_number,
+/*      product_description: this.product_description,
+        price: this.price,
+        amount_storage: this.amount_storage,
+        expiration_date: this.expiration_date,
+*/    };
 
-    //send request to API 
-    const resp = await fetch("http://localhost:3000/users/", {
-      method: "POST",
-      headers: {
-        "Accept": "application/json",
-        "Content-type": "application/json",
-        //"Access-Control-Allow-Origin": 'http://127.0.0.1:8080'
-      },
+      console.log(productBody)
 
-      //convert JS object to JSON object
-      body: JSON.stringify(userBody)
-    });
+      /*
+      let name = cname + "=";
+      let decodedCookie = decodeURIComponent(document.cookie);
+      let ca = decodedCookie.split(';');
+      for (let i = 0; i < ca.length; i++) {
+          let c = ca[i];
+          while (c.charAt(0) == ' ') {
+              c = c.substring(1);
+          }
+          if (c.indexOf(name) == 0) {
+              const token = c.substring(name.length, c.length);
+        */
 
-/*
-    //store response
-    const data = resp.json();
-    const msg = data.message;
+      /*
+const resp = await fetch("http://127.0.0.1:8000/api/lager", {
+method: "POST",
+headers: {
+  "Accept": "application/json",
+  "Content-type": "application/json"
+},
+// omvandla JS-objekt till JSON
+body: JSON.stringify(productBody)
+});*/
 
-    //check login
-    if (data.token == undefined) {
-      //no value
-      document.cookie = "UserToken=";
+      // töm inmatningsfält
+      this.state.product_title = "";
+      this.state.ean_number = "";
+      /*      this.product_description = "";
+            this.price = "";
+            this.amount_storage = "";
+            this.expiration_date = "";
+      */
+      // ladda om listan vid submit via emit mot förälderkomoponent
+      //this.$emit("addedProduct");
+
+      document.getElementById("messageError").innerHTML = ""
+      document.getElementById("messageAdd").innerHTML = "Product added!"
     } else {
-      //add value
-      document.cookie = "UserToken=" + data.token;
+      //skriv ut felmeddelande..
+      document.getElementById("messageError").innerHTML = "Title/EAN number must be filled"
     }
+  }
 
-    if (msg == "Användare inloggad!") {
-      // print message
-      document.getElementById("responseLoginSuccess").innerHTML = "Login success ";
-    } else {
-      document.getElementById("responseLoginFail").innerHTML = "Login fail";
-    }
-    //}
-  */}
-
+  //onSubmit={this.addProduct}
   render() {
     return (
-     <div></div>
+      <div>
+        <form onSubmit={this.handleSubmit}>
+          <label className="form-control-lg">Product title:</label>
+          <br />
+          <input
+            name="product_title"
+            type="text"
+            className="form-control-lg"
+            value={this.state.product_title}
+            onChange={this.handleEvent} />
+          <br />
+          <label className="form-control-lg">EAN number:</label>
+          <br />
+          <input
+            name="ean_number"
+            type="text"
+            className="form-control-lg"
+            value={this.state.ean_number}
+            onChange={this.handleEvent}
+          />
+          <br />
+          <label className="form-control-lg">Product description:</label>
+          <br />
+          <textarea
+            type="text"
+            placeholder="max 200 words"
+            className="form-control-lg"
+            rows="3"
+            max-rows="6">
+          </textarea>
+          <br />
+          <label className="form-control-lg">Selling price:</label>
+          <br />
+          <input
+            type="number"
+            className="form-control-lg" />
+          <br />
+          <label className="form-control-lg">Amount in storage:</label>
+          <br />
+          <input
+            type="number"
+            className="form-control-lg" />
+          <br />
+          <label className="form-control-lg">Expiration date (earliest):</label>
+          <br />
+          <input
+            type="text"
+            placeholder="yyyy-mm-dd"
+            className="form-control-lg" />
+          <br />
+          <label className="form-control-lg">Image description:</label>
+          <br />
+          <input
+            type="text"
+            placeholder="key words"
+            className="form-control-lg" />
+          <br />
+          <input
+            type="submit"
+            value="Add product!"
+            className="btn btn-dark" />
+        </form>
+        <br />
+        <p id="messageAdd"></p>
+        <p id="messageError"></p>
+
+      </div>
+
     );
   }
 }

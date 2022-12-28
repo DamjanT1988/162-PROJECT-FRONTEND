@@ -48,7 +48,7 @@ class ProductItem extends React.Component {
                 <p>{product.amount_storage}</p>
 
                 <input
-                    type="button"
+                    type="submit"
                     value="+1 storage"
                     id={product._id}
                     name={product.amount_storage}
@@ -149,6 +149,7 @@ class ListProductsClass extends React.Component {
 
         //this.product.amount_storage++;
 
+        /*
         const amountComp = amount + 1;
 
         let productBody = {
@@ -165,7 +166,7 @@ class ListProductsClass extends React.Component {
             credentials: 'same-origin',
             body: JSON.stringify(productBody)
         })
-    }
+    */    }
 
 
     // funktion för att öka/minska lager
@@ -173,6 +174,7 @@ class ListProductsClass extends React.Component {
 
         //this.product.amount_storage++;
 
+        /*
         const amountComp = amount - 1;
 
         let productBody = {
@@ -190,7 +192,7 @@ class ListProductsClass extends React.Component {
             body: JSON.stringify(productBody)
         })
 
-    }
+    */    }
 
 
     render() {
