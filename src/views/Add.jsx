@@ -20,16 +20,11 @@ class AddProducts extends React.Component {
     //bind methods/functions
     this.handleEvent = this.handleEvent.bind(this);
     this.addProduct = this.addProduct.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    //  this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   //save the input value and update state
-
   handleEvent(event) {
-    /*this.setState({
-      product_title: event.target.product_title.value,
-      ean_number: event.target.ean_number.value
-    });*/
     const target = event.target;
     const value = target.value;
     const name = target.name;
@@ -39,14 +34,15 @@ class AddProducts extends React.Component {
     });
   }
 
+  /*
+    handleSubmit(event) {
+      alert('Title: ' + this.state.product_title + ' ' + 'Number: ' + this.state.ean_number);
+      event.preventDefault();
+    }
+  */
 
-  handleSubmit(event) {
-    alert('Title: ' + this.state.product_title + ' ' + 'Number: ' + this.state.ean_number);
+  async addProduct(event) {
     event.preventDefault();
-  }
-
-  async addProduct() {
-   
     // kontroll att något fylls i
     if (this.state.product_title.length > 0 && this.state.ean_number > 0) {
 
@@ -54,11 +50,11 @@ class AddProducts extends React.Component {
       let productBody = {
         product_title: this.state.product_title,
         ean_number: this.state.ean_number,
-/*      product_description: this.product_description,
-        price: this.price,
-        amount_storage: this.amount_storage,
-        expiration_date: this.expiration_date,
-*/    };
+        product_description: this.state.product_description,
+        price: this.state.price,
+        amount_storage: this.state.amount_storage,
+        expiration_date: this.state.expiration_date,
+      };
 
       console.log(productBody)
 
@@ -86,30 +82,28 @@ headers: {
 body: JSON.stringify(productBody)
 });*/
 
-      // töm inmatningsfält
-      this.state.product_title = "";
-      this.state.ean_number = "";
-      /*      this.product_description = "";
-            this.price = "";
-            this.amount_storage = "";
-            this.expiration_date = "";
-      */
-      // ladda om listan vid submit via emit mot förälderkomoponent
-      //this.$emit("addedProduct");
+      this.setState({
+        product_title: "",
+        ean_number: "",
+        product_description: "",
+        price: "",
+        amount_storage: "",
+        expiration_date: ""
+      })
 
       document.getElementById("messageError").innerHTML = ""
       document.getElementById("messageAdd").innerHTML = "Product added!"
     } else {
-      //skriv ut felmeddelande..
+
       document.getElementById("messageError").innerHTML = "Title/EAN number must be filled"
     }
   }
 
-  //onSubmit={this.addProduct}
+
   render() {
     return (
       <div>
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.addProduct} id="formAdd">
           <label className="form-control-lg">Product title:</label>
           <br />
           <input
@@ -132,38 +126,44 @@ body: JSON.stringify(productBody)
           <label className="form-control-lg">Product description:</label>
           <br />
           <textarea
+            name="product_description"
             type="text"
             placeholder="max 200 words"
             className="form-control-lg"
             rows="3"
-            max-rows="6">
+            max-rows="6"
+            value={this.state.product_description}
+            onChange={this.handleEvent}>
           </textarea>
           <br />
           <label className="form-control-lg">Selling price:</label>
           <br />
           <input
+            name="price"
             type="number"
-            className="form-control-lg" />
+            className="form-control-lg"
+            value={this.state.price}
+            onChange={this.handleEvent}
+          />
           <br />
           <label className="form-control-lg">Amount in storage:</label>
           <br />
           <input
+            name="amount_storage"
             type="number"
-            className="form-control-lg" />
+            className="form-control-lg"
+            value={this.state.amount_storage}
+            onChange={this.handleEvent} />
           <br />
           <label className="form-control-lg">Expiration date (earliest):</label>
           <br />
           <input
+            name="expiration_date"
             type="text"
             placeholder="yyyy-mm-dd"
-            className="form-control-lg" />
-          <br />
-          <label className="form-control-lg">Image description:</label>
-          <br />
-          <input
-            type="text"
-            placeholder="key words"
-            className="form-control-lg" />
+            className="form-control-lg"
+            value={this.state.expiration_date}
+            onChange={this.handleEvent} />
           <br />
           <input
             type="submit"
