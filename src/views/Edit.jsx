@@ -24,7 +24,7 @@ class EditProducts extends React.Component {
                 <input 
                     type="submit"
                     value="Reload list!"
-                    class="btn btn-dark" />
+                    className="btn btn-dark" />
                 <br />
             </form>
         );
