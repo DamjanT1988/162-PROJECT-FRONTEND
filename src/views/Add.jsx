@@ -20,7 +20,6 @@ class AddProducts extends React.Component {
     //bind methods/functions
     this.handleEvent = this.handleEvent.bind(this);
     this.addProduct = this.addProduct.bind(this);
-    //  this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   //save the input value and update state
@@ -33,13 +32,6 @@ class AddProducts extends React.Component {
       [name]: value
     });
   }
-
-  /*
-    handleSubmit(event) {
-      alert('Title: ' + this.state.product_title + ' ' + 'Number: ' + this.state.ean_number);
-      event.preventDefault();
-    }
-  */
 
   async addProduct(event) {
     event.preventDefault();
