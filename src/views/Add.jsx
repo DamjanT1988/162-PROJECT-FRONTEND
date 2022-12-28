@@ -51,20 +51,7 @@ class AddProducts extends React.Component {
       console.log(productBody)
 
       /*
-      let name = cname + "=";
-      let decodedCookie = decodeURIComponent(document.cookie);
-      let ca = decodedCookie.split(';');
-      for (let i = 0; i < ca.length; i++) {
-          let c = ca[i];
-          while (c.charAt(0) == ' ') {
-              c = c.substring(1);
-          }
-          if (c.indexOf(name) == 0) {
-              const token = c.substring(name.length, c.length);
-        */
-
-      /*
-const resp = await fetch("http://127.0.0.1:8000/api/lager", {
+const resp = await fetch("http://localhost:3000/products/", {
 method: "POST",
 headers: {
   "Accept": "application/json",
