@@ -14,7 +14,7 @@ class ProductItem extends React.Component {
     increaseUp(e) {
 
         this.props.onIncrease(e.target.id, e.target.name);
-        
+
     }
 
     decreaseDown(e) {
@@ -95,14 +95,20 @@ class ListProductsClass extends React.Component {
     constructor(props) {
         super(props);
 
-    /*    
+        /*
         const resp = fetch("http://localhost:3000/products/", {
             headers: {
-            }
+                "Accept": "application/json",
+                "Content-type": "application/json",
+            },
+            credentials: 'same-origin',
+
         })
     
-        const data = resp.json();
+        console.log(resp)
+        //const data = resp.json();
     */
+
         var data = [
             {
                 _id: "63a9b40210fff3368650e15f",
