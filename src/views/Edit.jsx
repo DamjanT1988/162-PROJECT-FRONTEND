@@ -9,7 +9,13 @@ class SearchArticle extends React.Component {
         super(props);
         //set initial state
         this.state = {
-            _id: ''
+            _id: '',
+            product_title: '',
+            ean_number: '',
+            product_description: '',
+            price: '',
+            amount_storage: '',
+            expiration_date: ''
         };
 
         //bind methods/functions
@@ -39,8 +45,7 @@ class SearchArticle extends React.Component {
                     method: "GET",
                     headers: {
                         "Accept": "application/json",
-                        "Content-type": "application/json",
-                        "Authorization": `Bearer ${token}`
+                        "Content-type": "application/json"
                     }
                 })
     
@@ -51,17 +56,21 @@ class SearchArticle extends React.Component {
                 this.product = data;
             }
         }*/
+
+        this.setState({
+            _id: ""
+        })
     }
 
     render() {
         return (
             <form onSubmit={this.getProductsById} id="searchEdit">
                 <input
-                    name="ean_number"
+                    name="_id"
                     type="text"
-                    placeholder="EAN number"
+                    placeholder="article number"
                     className="form-control-lg"
-                    value={this.state.ean_number}   //prop from parent
+                    value={this.state._id}   //prop from parent
                     onChange={this.handleEvent}     //event listener; call method
                 />
                 <p
@@ -264,7 +273,7 @@ class EditView extends React.Component {
 
                         <h2>EDIT AN ARTICLE</h2>
                         <p>
-                            Search for the EAN product number for edit: if no result then the EAN number does not exist. Edit of
+                            Search for the article product number for edit: if no result then the article number does not exist. Edit of
                             article number might write over existing article.
                         </p>
                         <SearchArticle />
