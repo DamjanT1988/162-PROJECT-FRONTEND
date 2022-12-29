@@ -2,6 +2,100 @@ import React from 'react';
 import ListProducts from '../subcomponents/ListProducts';
 
 /*******************************************************************************************/
+// CHILD COMPONENT: SEARCHPRODUCT
+
+class SearchProduct extends React.Component {
+    constructor(props) {
+        super(props);
+        //set initial state
+        this.state = {
+            search_word: ''
+        };
+
+        //bind methods/functions
+        this.handleEvent = this.handleEvent.bind(this);
+        this.searchProduct = this.searchProduct.bind(this);
+    }
+
+    //save the input value and update state
+    handleEvent(event) {
+        const target = event.target;
+        const value = target.value;
+        const name = target.name;
+        //update state with new values
+        this.setState({
+            [name]: value
+        });
+    }
+
+    // sök product-funktion
+    async searchProduct(event) {
+
+        event.preventDefault();
+
+        console.log(this.state.search_word);
+
+        /*
+        //variabler
+        let input = document.getElementById('searchbar').value
+        //gör text till gemaner
+        input = input.toLowerCase();
+        let x = document.getElementsByClassName('listobject');
+        let i;
+
+        //loopa igenom alla HTML-objekt
+        for (i = 0; i < x.length; i++) {
+            //göm icke-match
+            if (!x[i].innerHTML.toLowerCase().includes(input)) {
+                x[i].style.display = "none";
+            }
+            //visa matchade
+            else {
+                x[i].style.display = "item";
+            }
+        }*/
+    }
+
+    reloadList() {
+        window.location.reload(false);
+    }
+
+    render() {
+        return (
+            <div>
+                <form >
+                    <input
+                        id="searchbar"
+                        type="text"
+                        name="search_word"
+                        className="form-control-lg"
+                        placeholder="key words"
+                        onChange={this.handleEvent}
+                        onClick={this.searchProduct} />
+                    <br /><br />
+                    <input
+                        type="submit"
+                        className="btn btn-dark"
+                        value="Search in list!"
+                        onChange={this.handleEvent}
+                        onClick={this.searchProduct} />
+                </form>
+                <br />
+                <input
+                    className="btn btn-dark"
+                    value="Reload list!"
+                    onChange={this.handleEvent}
+                    onClick={this.reloadList} />
+                <br /><br />
+            </div>
+        )
+    }
+}
+// END OF CHILD COMPONENT: SEARCHPRODUCT
+/*******************************************************************************************/
+
+
+/*******************************************************************************************/
 // CHILD COMPONENT: SEARCHARTICLE
 
 class SearchArticle extends React.Component {
@@ -38,7 +132,7 @@ class SearchArticle extends React.Component {
         event.preventDefault();
 
         console.log(this.state._id);
-        
+
         const id = this.state._id
         /*        
         const resp = await fetch("http://localhost:3000/products/" + id, {
@@ -59,7 +153,8 @@ class SearchArticle extends React.Component {
 
         this.setState({
             _id: ""
-        })
+        }
+        )
     }
 
     render() {
@@ -246,12 +341,9 @@ class EditProducts extends React.Component {
                 <p id="messageError"></p>
 
             </div>
-
         );
     }
 }
-
-
 
 // END OF EDIT COMPONENT
 /*******************************************************************************************/
@@ -287,6 +379,10 @@ class EditView extends React.Component {
                             Search a product by any key word (like product name or #1 article number) and view the result below; or view the whole list
                             below without search; reload to search the whole list again:
                         </p>
+                        <SearchProduct />
+                        <p>
+                            Newest product shown first:
+                        </p>
                         <ListProducts />
                     </div>
                 </div>
@@ -298,11 +394,6 @@ class EditView extends React.Component {
 
 // END OF STARTVIEW COMPONENT
 /*******************************************************************************************/
-/*
-export function HomeSection() {
-    const history = useHistory();
-history.push('login');
-} */
 
 function Edit() {
 
