@@ -57,7 +57,6 @@ headers: {
   "Access-Control-Allow-Origin": 'http://localhost:8080'
 },
 mode: 'cors',
-// omvandla JS-objekt till JSON
 body: JSON.stringify(productBody)
 });
 
@@ -168,16 +167,6 @@ body: JSON.stringify(productBody)
 // PARENT COMPONENT: STARTVIEW
 
 class AddView extends React.Component {
-
-  
-/*  componentDidUpdate () {
-console.log("addview")
-//    refreshList = () => 
-//  {
-//    "refresh"
-//}
-}*/
-
 
   render() {
     

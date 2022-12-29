@@ -109,30 +109,6 @@ class ListProductsClass extends React.Component {
         this.decrease = this.decrease.bind(this);
     }
 
-/*
-    componentDidUpdate() {
-        fetch("http://localhost:3000/products/", {
-            method: "GET",
-            headers: {
-                "Accept": "application/json",
-                "Content-type": "application/json",
-                "Access-Control-Allow-Origin": 'http://localhost:8080'
-              },
-              mode: 'cors'
-        })
-
-        .then((response) => response.json())
-        .then((data) => {
-            this.setState({
-              data: data
-           })
-            //    this.state.data = data;
-            console.log(data)   
-    }) 
-        console.log("turkupdate")
-    }
-*/
-
     componentDidMount() {
         fetch("http://localhost:3000/products/", {
             method: "GET",
@@ -152,22 +128,16 @@ class ListProductsClass extends React.Component {
             //    this.state.data = data;
             console.log(data)   
     }) 
-        console.log("turkmount")
     }
 
 
     async increase(id, amount) {
-
-        //amount++;
-
         const amountComp = ++amount;
 
         let productBody = {
             _id: id,
             amount_storage: amountComp
         };
-
-        console.log(productBody)
 
         const resp = await fetch("http://localhost:3000/products/" + id, {
             method: "PUT",
@@ -187,8 +157,6 @@ class ListProductsClass extends React.Component {
             _id: id,
             amount_storage: amountComp
         };
-
-        console.log(productBody)
 
         const resp = await fetch("http://localhost:3000/products/" + id, {
             method: "PUT",
