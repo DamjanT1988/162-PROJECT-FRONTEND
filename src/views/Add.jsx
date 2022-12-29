@@ -48,8 +48,6 @@ class AddProducts extends React.Component {
         expiration_date: this.state.expiration_date,
       };
 
-      console.log(productBody)
-
       
 const resp = await fetch("http://localhost:3000/products/", {
 method: "POST",
@@ -79,6 +77,8 @@ body: JSON.stringify(productBody)
       amount_storage: "",
       expiration_date: ""
     })
+
+    window.location.reload(false);
   }
 
 
@@ -155,9 +155,7 @@ body: JSON.stringify(productBody)
         <br />
         <p id="messageAdd"></p>
         <p id="messageError"></p>
-
       </div>
-
     );
   }
 }
@@ -171,7 +169,18 @@ body: JSON.stringify(productBody)
 
 class AddView extends React.Component {
 
+  
+/*  componentDidUpdate () {
+console.log("addview")
+//    refreshList = () => 
+//  {
+//    "refresh"
+//}
+}*/
+
+
   render() {
+    
     //check if a cookie value exist/logged in user
     if (document.cookie === 'UserToken=' || document.cookie === '') {
       window.location = '/';
@@ -194,6 +203,7 @@ class AddView extends React.Component {
 
             </p>
             <ListProducts />
+
           </div>
         </div>
       )

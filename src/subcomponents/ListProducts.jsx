@@ -11,19 +11,25 @@ class ProductItem extends React.Component {
         this.decreaseDown = this.decreaseDown.bind(this);
     }
 
+    componentDidUpdate() {}
+
+
     increaseUp(e) {
 
         this.props.onIncrease(e.target.id, e.target.name);
-
+    
+        document.getElementById("storage").innerHTML = ++e.target.name
     }
 
     decreaseDown(e) {
 
         this.props.onDecrease(e.target.id, e.target.name);
+        document.getElementById("storage").innerHTML = --e.target.name
     }
 
     render() {
         const product = this.props.product;
+
 
         return (
             <article className="listobject">
@@ -45,7 +51,7 @@ class ProductItem extends React.Component {
                 <p>{product.price} kr</p>
 
                 <strong>Amount in storage:</strong>
-                <p>{product.amount_storage}</p>
+                <p id="storage">{product.amount_storage}</p>
 
                 <input
                     type="submit"
@@ -93,7 +99,18 @@ class ProductItem extends React.Component {
 
 class ListProductsClass extends React.Component {
     constructor(props) {
-        super(props);
+        super(props);  
+        this.state = {
+            data: []
+        };
+
+        //bind methods/functions
+        this.increase = this.increase.bind(this);
+        this.decrease = this.decrease.bind(this);
+    }
+
+/*
+    componentDidUpdate() {
         fetch("http://localhost:3000/products/", {
             method: "GET",
             headers: {
@@ -111,29 +128,46 @@ class ListProductsClass extends React.Component {
            })
             //    this.state.data = data;
             console.log(data)   
-    })      
+    }) 
+        console.log("turkupdate")
+    }
+*/
 
-        this.state = {
-            data: []
-        };
+    componentDidMount() {
+        fetch("http://localhost:3000/products/", {
+            method: "GET",
+            headers: {
+                "Accept": "application/json",
+                "Content-type": "application/json",
+                "Access-Control-Allow-Origin": 'http://localhost:8080'
+              },
+              mode: 'cors'
+        })
 
-        //bind methods/functions
-        this.increase = this.increase.bind(this);
-        this.decrease = this.decrease.bind(this);
+        .then((response) => response.json())
+        .then((data) => {
+            this.setState({
+              data: data
+           })
+            //    this.state.data = data;
+            console.log(data)   
+    }) 
+        console.log("turkmount")
     }
 
 
     async increase(id, amount) {
 
-        //this.product.amount_storage++;
+        //amount++;
 
-        /*
-        const amountComp = amount + 1;
+        const amountComp = ++amount;
 
         let productBody = {
             _id: id,
             amount_storage: amountComp
         };
+
+        console.log(productBody)
 
         const resp = await fetch("http://localhost:3000/products/" + id, {
             method: "PUT",
@@ -144,21 +178,17 @@ class ListProductsClass extends React.Component {
             credentials: 'same-origin',
             body: JSON.stringify(productBody)
         })
-    */    }
+    }
 
-
-    // funktion för att öka/minska lager
     async decrease(id, amount) {
-
-        //this.product.amount_storage++;
-
-        /*
-        const amountComp = amount - 1;
+        const amountComp = --amount;
 
         let productBody = {
             _id: id,
             amount_storage: amountComp
         };
+
+        console.log(productBody)
 
         const resp = await fetch("http://localhost:3000/products/" + id, {
             method: "PUT",
@@ -169,9 +199,7 @@ class ListProductsClass extends React.Component {
             credentials: 'same-origin',
             body: JSON.stringify(productBody)
         })
-
-    */    }
-
+    }
 
     render() {
         const list = [];
@@ -186,6 +214,8 @@ class ListProductsClass extends React.Component {
                 />
 
             )})
+
+            list.reverse();
 
         return (
             <div>{list}</div>
