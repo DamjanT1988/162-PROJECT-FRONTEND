@@ -36,7 +36,7 @@ class AddProducts extends React.Component {
   async addProduct(event) {
     event.preventDefault();
     // kontroll att något fylls i
-    if (this.state.product_title.length > 0 && this.state.ean_number > 0) {
+    if (this.state.product_title.length > 0 && this.state.ean_number.length > 0) {
 
       // skapa en JS-objekt att skicka med
       let productBody = {
@@ -68,7 +68,7 @@ body: JSON.stringify(productBody)
 
       document.getElementById("messageError").innerHTML = "Title/EAN number must be filled"
     }
-    
+
     this.setState({
       product_title: "",
       ean_number: "",
