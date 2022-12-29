@@ -94,56 +94,34 @@ class ProductItem extends React.Component {
 class ListProductsClass extends React.Component {
     constructor(props) {
         super(props);
-
-        /*
-        const resp = fetch("http://localhost:3000/products/", {
+        fetch("http://localhost:3000/products/", {
+            method: "GET",
             headers: {
                 "Accept": "application/json",
                 "Content-type": "application/json",
-            },
-            credentials: 'same-origin',
-
+                "Access-Control-Allow-Origin": 'http://localhost:8080'
+              },
+              mode: 'cors'
         })
-    
-        console.log(resp)
-        //const data = resp.json();
-    */
 
-        var data = [
-            {
-                _id: "63a9b40210fff3368650e15f",
-                product_title: "I",
-                ean_number: "Projing",
-                product_description: "A",
-                amount_storage: 1,
-                price: 44,
-                expiration_date: "2",
-                createdAt: "2022-12-26T14:47:30.038Z",
-                updatedAt: "2022-12-26T14:47:30.038Z",
-                __v: 0
-            },
-            {
-                _id: "3368650e15f",
-                product_title: "Iööö",
-                ean_number: "Projingöööööö",
-                product_description: "kkA",
-                amount_storage: 5,
-                price: 477,
-                expiration_date: "88",
-                createdAt: "2022-12-26T14:47:30.038Z",
-                updatedAt: "2022-12-26T14:47:30.038Z",
-                __v: 0
-            }
-        ]
+        .then((response) => response.json())
+        .then((data) => {
+            this.setState({
+              data: data
+           })
+            //    this.state.data = data;
+            console.log(data)   
+    })      
 
         this.state = {
-            data: data,
+            data: []
         };
 
         //bind methods/functions
         this.increase = this.increase.bind(this);
         this.decrease = this.decrease.bind(this);
     }
+
 
     async increase(id, amount) {
 
@@ -196,7 +174,6 @@ class ListProductsClass extends React.Component {
 
 
     render() {
-
         const list = [];
 
         this.state.data.forEach((product) => {
@@ -207,9 +184,8 @@ class ListProductsClass extends React.Component {
                     onIncrease={this.increase}
                     onDecrease={this.decrease}
                 />
-            )
-        }
-        )
+
+            )})
 
         return (
             <div>{list}</div>

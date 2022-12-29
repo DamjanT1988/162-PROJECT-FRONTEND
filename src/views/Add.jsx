@@ -35,10 +35,10 @@ class AddProducts extends React.Component {
 
   async addProduct(event) {
     event.preventDefault();
-    // kontroll att något fylls i
+
+
     if (this.state.product_title.length > 0 && this.state.ean_number.length > 0) {
 
-      // skapa en JS-objekt att skicka med
       let productBody = {
         product_title: this.state.product_title,
         ean_number: this.state.ean_number,
@@ -56,12 +56,14 @@ method: "POST",
 headers: {
   "Accept": "application/json",
   "Content-type": "application/json",
-  "Access-Control-Allow-Origin": 'http://127.0.0.1:8080'
+  "Access-Control-Allow-Origin": 'http://localhost:8080'
 },
 mode: 'cors',
 // omvandla JS-objekt till JSON
 body: JSON.stringify(productBody)
 });
+
+
       document.getElementById("messageError").innerHTML = ""
       document.getElementById("messageAdd").innerHTML = "Product added!"
     } else {
