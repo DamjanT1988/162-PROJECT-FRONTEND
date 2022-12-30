@@ -34,39 +34,31 @@ class Register extends React.Component {
         //prevent reload
         event.preventDefault();
         //check if input
-        //if (this.state.emailUser.length > 0 || this.state.emailUser !== undefined) {
-        //document.getElementById("responseLoginFail").innerHTML = "";
-        //document.getElementById("responseLoginSuccess").innerHTML = "";
-
-        //create a JS object
-        /*let keyBody = {
-            key: this.state.keyUser,
-        };*/
+        /*
+        if (this.state.emailUser.length > 0 || this.state.emailUser !== undefined) {
+        document.getElementById("responseLoginFail").innerHTML = "";
+        document.getElementById("responseLoginSuccess").innerHTML = "";
 
         //send request to API 
-        /*const respKey = await fetch("http://localhost:3000/keys/", {
+        const respKey = await fetch("http://localhost:3000/keys/", {
             method: "GET",
             headers: {
                 "Accept": "application/json",
                 "Content-type": "application/json",
                 "Access-Control-Allow-Origin": 'http://localhost:8080'
             },
-            mode: 'cors',
-            //convert JS object to JSON object
-            //body: JSON.stringify(keyBody)
+            mode: 'cors'
         });
 
-        //var data = await respKey;
+        var data = await respKey;
 
-        //console.log(data._id)
+        console.log(data._id)
         console.log(respKey._id)
-        */
-
-
-        //check if input key macthes with first database key
         
-        //if (respKey[0]._id == this.state.userKey) {
-
+        //check if input key macthes with first database key
+        if (respKey[0]._id == this.state.userKey) {
+        */
+        
             //create a JS object
             let userBody = {
                 name: this.state.nameUser,
@@ -83,7 +75,6 @@ class Register extends React.Component {
                     "Access-Control-Allow-Origin": 'http://localhost:8080'
                 },
                 mode: 'cors',
-
                 //convert JS object to JSON object
                 body: JSON.stringify(userBody)
             });
@@ -93,8 +84,6 @@ class Register extends React.Component {
                 const data = await resp.json();
                 //const msg = data.message;
             
-            console.log(data)
-
                 //check login
                 if (data._id == undefined) {
                   //no value
@@ -121,8 +110,8 @@ class Register extends React.Component {
 
             //reload page for header to appear, wait 2 seconds
             //setTimeout(() => {window.location.reload(false)}, 2000);
-        }
-
+        //}
+    }
     
 
     render() {
