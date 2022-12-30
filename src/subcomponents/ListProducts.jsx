@@ -9,9 +9,28 @@ class ProductItem extends React.Component {
 
         this.increaseUp = this.increaseUp.bind(this);
         this.decreaseDown = this.decreaseDown.bind(this);
+        this.deleteProduct = this.deleteProduct.bind(this);
     }
 
-    componentDidUpdate() {}
+    async deleteProduct(e) {
+
+        var id = e.target.id
+
+        const resp = await fetch("http://localhost:3000/products/" + id, {
+            method: "DELETE",
+            headers: {
+                "Accept": "application/json",
+                "Content-type": "application/json",
+                "Access-Control-Allow-Origin": 'http://localhost:8080'
+            },
+            mode: 'cors',
+        });
+
+        document.getElementById("deletedMessage").innerHTML = "Article deleted!"
+
+        //reload page for header to appear, wait 1 seconds
+        setTimeout(() => { window.location.reload(false) }, 1000);
+    }
 
 
     increaseUp(e) {
@@ -83,9 +102,14 @@ class ProductItem extends React.Component {
 
                 <br />
                 <input
-                    type="submit"
+                    type="button"
                     value="DELETE!"
-                    className="btn btn-red" />
+                    className="btn btn-red"
+                    id={product._id}
+                    onClick={this.deleteProduct} />
+
+                <p id="deletedMessage"></p>
+
             </article>
         );
     }
@@ -98,7 +122,7 @@ class ProductItem extends React.Component {
 
 class ListProductsClass extends React.Component {
     constructor(props) {
-        super(props);  
+        super(props);
         this.state = {
             data: []
         };
@@ -115,16 +139,16 @@ class ListProductsClass extends React.Component {
                 "Accept": "application/json",
                 "Content-type": "application/json",
                 "Access-Control-Allow-Origin": 'http://localhost:8080'
-              },
-              mode: 'cors'
+            },
+            mode: 'cors'
         })
 
-        .then((response) => response.json())
-        .then((data) => {
-            this.setState({
-              data: data
-           })
-    }) 
+            .then((response) => response.json())
+            .then((data) => {
+                this.setState({
+                    data: data
+                })
+            })
     }
 
 
@@ -178,9 +202,10 @@ class ListProductsClass extends React.Component {
                     onDecrease={this.decrease}
                 />
 
-            )})
+            )
+        })
 
-            list.reverse();
+        list.reverse();
 
         return (
             <div>{list}</div>

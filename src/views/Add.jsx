@@ -48,17 +48,17 @@ class AddProducts extends React.Component {
         expiration_date: this.state.expiration_date,
       };
 
-      
-const resp = await fetch("http://localhost:3000/products/", {
-method: "POST",
-headers: {
-  "Accept": "application/json",
-  "Content-type": "application/json",
-  "Access-Control-Allow-Origin": 'http://localhost:8080'
-},
-mode: 'cors',
-body: JSON.stringify(productBody)
-});
+
+      const resp = await fetch("http://localhost:3000/products/", {
+        method: "POST",
+        headers: {
+          "Accept": "application/json",
+          "Content-type": "application/json",
+          "Access-Control-Allow-Origin": 'http://localhost:8080'
+        },
+        mode: 'cors',
+        body: JSON.stringify(productBody)
+      });
 
 
       document.getElementById("messageError").innerHTML = ""
@@ -77,7 +77,8 @@ body: JSON.stringify(productBody)
       expiration_date: ""
     })
 
-    window.location.reload(false);
+    //reload page for header to appear, wait 2 seconds
+    setTimeout(() => { window.location.reload(false) }, 2000);
   }
 
 
@@ -169,7 +170,7 @@ body: JSON.stringify(productBody)
 class AddView extends React.Component {
 
   render() {
-    
+
     //check if a cookie value exist/logged in user
     if (document.cookie === 'UserToken=' || document.cookie === '') {
       window.location = '/';
@@ -181,7 +182,7 @@ class AddView extends React.Component {
 
             <h2>ADD PRODUCT</h2>
             <p>
-            Add a new product article below; title and EAN number must be filled:
+              Add a new product article below; title and EAN number must be filled:
             </p>
             <AddProducts />
           </div>
@@ -189,7 +190,7 @@ class AddView extends React.Component {
           <div className="col-md bg-dark bg-gradient text-white p-4">
             <h2>PRODUCT LIST</h2>
             <p>
-            The five latest new products are shown; newest first:
+              The five latest new products are shown; newest first:
             </p>
             <ListProducts />
 

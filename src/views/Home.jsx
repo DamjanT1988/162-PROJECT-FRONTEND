@@ -106,9 +106,9 @@ class Register extends React.Component {
             
                 if (data._id == undefined) {
                   // print message
-                  document.getElementById("responseLoginFail2").innerHTML = "Registration fail";
+                  document.getElementById("responseLoginFail2").innerHTML = "Registration fail!";
                 } else {
-                    document.getElementById("responseLoginSuccess2").innerHTML = "Registration success ";
+                    document.getElementById("responseLoginSuccess2").innerHTML = "Registration success! Menu will appear..";
 
                 }
                 
@@ -119,8 +119,8 @@ class Register extends React.Component {
             document.getElementById("passwordUser").value = "";
             document.getElementById("keyUser").value = "";
 
-            //window.location.reload(false);
-
+            //reload page for header to appear, wait 2 seconds
+            //setTimeout(() => {window.location.reload(false)}, 2000);
         }
 
     
@@ -269,13 +269,13 @@ class Login extends React.Component {
 
             if (data.message == "Login approved!") {
                 // print message
-                document.getElementById("responseLoginSuccess").innerHTML = "Login success ";
+                document.getElementById("responseLoginSuccess").innerHTML = "Login success! Logging in..";
             } else {
                 document.getElementById("responseLoginFail").innerHTML = "Login fail";
             }
 
-            //reload page for header to appear
-            window.location.reload(false);
+            //reload page for header to appear, wait 2 seconds
+            setTimeout(() => {window.location.reload(false)}, 2000);
         }
 
 

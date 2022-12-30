@@ -50,7 +50,7 @@ label {
   font-size: 2em;
 }
 
-#messageAdd {
+#messageAdd, #deletedMessage {
   color: green;
   font-weight: bolder;
   font-size: 2em;
