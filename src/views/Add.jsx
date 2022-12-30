@@ -77,8 +77,7 @@ class AddProducts extends React.Component {
       expiration_date: ""
     })
 
-    //reload page for header to appear, wait 2 seconds
-    setTimeout(() => { window.location.reload(false) }, 2000);
+    window.location.reload(false)
   }
 
 
@@ -146,11 +145,11 @@ class AddProducts extends React.Component {
             className="form-control-lg"
             value={this.state.expiration_date}
             onChange={this.handleEvent} />
-          <br />
+          <br /><br />
           <input
             type="submit"
             value="Add product!"
-            className="btn btn-dark" />
+            className="btn btn-lg" />
         </form>
         <br />
         <p id="messageAdd"></p>

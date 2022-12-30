@@ -175,7 +175,7 @@ class Register extends React.Component {
                 <input
                     type="submit"
                     value="Register!"
-                    className="btn" />
+                    className="btn btn btn-lg" />
 
                 <p id="responseLoginFail2"></p>
                 <p id="responseLoginSuccess2"></p>
@@ -309,7 +309,7 @@ class Login extends React.Component {
                 <input
                     type="submit"
                     value="Log in!"
-                    className="btn" />
+                    className="btn btn btn-lg" />
 
                 <p id="responseLoginFail"></p>
                 <p id="responseLoginSuccess"></p>

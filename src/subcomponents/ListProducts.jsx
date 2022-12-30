@@ -76,7 +76,7 @@ class ProductItem extends React.Component {
                     value="+1 storage"
                     id={product._id}
                     name={product.amount_storage}
-                    className="btn btn-light-red lager"
+                    className="btn btn-light-green lager"
                     onClick={this.increaseUp}
                 />
                 <input
@@ -84,7 +84,7 @@ class ProductItem extends React.Component {
                     value="-1 storage"
                     id={product._id}
                     name={product.amount_storage}
-                    className="btn btn-light-green lager"
+                    className="btn btn-light-red lager"
                     onClick={this.decreaseDown}
                 />
                 <br />

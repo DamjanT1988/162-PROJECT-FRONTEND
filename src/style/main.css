@@ -6,6 +6,7 @@ body {
   font-weight: 400;
   line-height: 2em;
   background-color: white;
+  
 }
 
 input, textarea {
@@ -22,8 +23,18 @@ h3 {
   font-size: 1.4em;
 }
 
+article, form, h2, p {
+  text-align: center;
+  font-size: 1.25em;
+}
+
 label {
   font-weight: bold;
+  font-size: 1.5em;
+}
+
+input {
+  font-weight: 900;
   font-size: 1.5em;
 }
 

@@ -33,10 +33,8 @@ class SearchProduct extends React.Component {
 
         event.preventDefault();
 
-        console.log(this.state.search_word);
-        
         let input = document.getElementById('searchbar').value
-        //gör text till gemaner
+
         input = input.toLowerCase();
         let x = document.getElementsByClassName('listobject');
         let i;
@@ -73,19 +71,19 @@ class SearchProduct extends React.Component {
                     <br /><br />
                     <input
                         type="submit"
-                        className="btn btn-dark"
+                        className="btn btn-lg"
                         value="Search in list!"
                         onChange={this.handleEvent}
                         onClick={this.searchProduct} />
+                    <br /><br />
+                    <input
+                        type="submit"
+                        className="btn btn-lg"
+                        value="Reload list!"
+                        onChange={this.handleEvent}
+                        onClick={this.reloadList} />
+                    <br /><br />
                 </form>
-                <br />
-                <input
-                    type="submit"
-                    className="btn btn-dark"
-                    value="Reload list!"
-                    onChange={this.handleEvent}
-                    onClick={this.reloadList} />
-                <br /><br />
             </div>
         )
     }
@@ -130,36 +128,36 @@ class EditProducts extends React.Component {
 
     async updateProduct(event) {
         event.preventDefault();
-                if (this.state.product_title.length > 0 && this.state.ean_number.length > 0) {
+        if (this.state.product_title.length > 0 && this.state.ean_number.length > 0) {
 
-        let productBody = {
-            product_title: this.state.product_title,
-            ean_number: this.state.ean_number,
-            product_description: this.state.product_description,
-            price: this.state.price,
-            amount_storage: this.state.amount_storage,
-            expiration_date: this.state.expiration_date,
-        };
+            let productBody = {
+                product_title: this.state.product_title,
+                ean_number: this.state.ean_number,
+                product_description: this.state.product_description,
+                price: this.state.price,
+                amount_storage: this.state.amount_storage,
+                expiration_date: this.state.expiration_date,
+            };
 
-        const id = this.state._id
+            const id = this.state._id
 
-        const resp = await fetch("http://localhost:3000/products/" + id, {
-            method: "PUT",
-            headers: {
-                "Accept": "application/json",
-                "Content-type": "application/json"
-            },
-            credentials: 'same-origin',
-            body: JSON.stringify(productBody)
-        })
-        
-                   document.getElementById("messageError").innerHTML = ""
-                    document.getElementById("messageAdd").innerHTML = "Product updated!"
-                } else {
-        
-                    document.getElementById("messageError").innerHTML = "Title/EAN number must be filled"
-                }
-        
+            const resp = await fetch("http://localhost:3000/products/" + id, {
+                method: "PUT",
+                headers: {
+                    "Accept": "application/json",
+                    "Content-type": "application/json"
+                },
+                credentials: 'same-origin',
+                body: JSON.stringify(productBody)
+            })
+
+            document.getElementById("messageError").innerHTML = ""
+            document.getElementById("messageAdd").innerHTML = "Product updated!"
+        } else {
+
+            document.getElementById("messageError").innerHTML = "Title/EAN number must be filled"
+        }
+
         window.location.reload(false);
     }
 
@@ -209,11 +207,11 @@ class EditProducts extends React.Component {
                         className="hidden"
                         id="id">
                     </p>
-                    <br />
+                    <br /><br />
                     <input
                         type="submit"
                         value="Get article!"
-                        className="btn btn-dark" />
+                        className="btn btn-lg" />
                     <br /><br />
                 </form>
 
@@ -280,11 +278,11 @@ class EditProducts extends React.Component {
                         className="form-control-lg"
                         value={this.state.expiration_date}
                         onChange={this.handleEvent} />
-                    <br />
+                    <br /><br />
                     <input
                         type="submit"
-                        value="Add product!"
-                        className="btn btn-dark" />
+                        value="Update product!"
+                        className="btn btn-lg" />
                 </form>
                 <br />
                 <p id="messageAdd"></p>
@@ -316,7 +314,7 @@ class EditView extends React.Component {
                         <h2>EDIT AN ARTICLE</h2>
                         <p>
                             Search for the article product number for edit: if no result then the article number does not exist. Edit of
-                            article number might write over existing article.
+                            article number might write over existing article:
                         </p>
 
                         <EditProducts />
