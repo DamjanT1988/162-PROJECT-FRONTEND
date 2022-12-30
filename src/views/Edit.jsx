@@ -34,9 +34,7 @@ class SearchProduct extends React.Component {
         event.preventDefault();
 
         console.log(this.state.search_word);
-
-        /*
-        //variabler
+        
         let input = document.getElementById('searchbar').value
         //gör text till gemaner
         input = input.toLowerCase();
@@ -53,7 +51,7 @@ class SearchProduct extends React.Component {
             else {
                 x[i].style.display = "item";
             }
-        }*/
+        }
     }
 
     reloadList() {
@@ -82,6 +80,7 @@ class SearchProduct extends React.Component {
                 </form>
                 <br />
                 <input
+                    type="submit"
                     className="btn btn-dark"
                     value="Reload list!"
                     onChange={this.handleEvent}
@@ -92,103 +91,6 @@ class SearchProduct extends React.Component {
     }
 }
 // END OF CHILD COMPONENT: SEARCHPRODUCT
-/*******************************************************************************************/
-
-
-/*******************************************************************************************/
-// CHILD COMPONENT: SEARCHARTICLE
-
-/*
-class SearchArticle extends React.Component {
-    constructor(props) {
-        super(props);
-        //set initial state
-        this.state = {
-            _id: '',
-            product_title: '',
-            ean_number: '',
-            product_description: '',
-            price: '',
-            amount_storage: '',
-            expiration_date: ''
-        };
-
-        //bind methods/functions
-        this.handleEvent = this.handleEvent.bind(this);
-        this.getProductsById = this.getProductsById.bind(this);
-    }
-
-    //save the input value and update state
-    handleEvent(event) {
-        const target = event.target;
-        const value = target.value;
-        const name = target.name;
-        //update state with new values
-        this.setState({
-            [name]: value
-        });
-    }
-
-    async getProductsById(event) {
-        event.preventDefault();
-
-        console.log(this.state._id);
-
-        const id = this.state._id
-
-        const resp = await fetch("http://localhost:3000/products/" + id, {
-            method: "GET",
-            headers: {
-                "Accept": "application/json",
-                "Content-type": "application/json"
-            }
-        })
-
-        const data = await resp.json();
-
-        //this.product = data;
-
-        console.log(data)
-        this.setState({
-            _id: "",
-            product_title: data.product_title,
-            ean_number: data.ean_number,
-            product_description: data.product_description,
-            price: data.price,
-            amount_storage: data.amount_storage,
-            expiration_date: data.expiration_date
-        })
-    }
-
-    render() {
-        return (
-            <form onSubmit={this.getProductsById} id="searchEdit">
-                <input
-                    name="_id"
-                    type="text"
-                    placeholder="article number"
-                    className="form-control-lg"
-                    value={this.state._id}          //prop from parent
-                    onChange={this.handleEvent}     //event listener; call method
-                />
-                <p
-                    hidden
-                    className="hidden"
-                    id="id">
-                </p>
-                <br />
-                <input
-                    type="submit"
-                    value="Get article!"
-                    className="btn btn-dark" />
-                <br /><br />
-            </form>
-        )
-    }
-}
-*/
-
-// END OF CHILD COMPONENT: SEARCHARTICLE
 /*******************************************************************************************/
 
 
@@ -239,11 +141,7 @@ class EditProducts extends React.Component {
             expiration_date: this.state.expiration_date,
         };
 
-        console.log(productBody)
-
         const id = this.state._id
-
-        console.log(id)
 
         const resp = await fetch("http://localhost:3000/products/" + id, {
             method: "PUT",
@@ -254,9 +152,6 @@ class EditProducts extends React.Component {
             credentials: 'same-origin',
             body: JSON.stringify(productBody)
         })
-
-        console.log(resp)
-
         
                    document.getElementById("messageError").innerHTML = ""
                     document.getElementById("messageAdd").innerHTML = "Product updated!"

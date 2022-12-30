@@ -181,7 +181,7 @@ class AddView extends React.Component {
 
             <h2>ADD PRODUCT</h2>
             <p>
-
+            Add a new product article below; title and EAN number must be filled:
             </p>
             <AddProducts />
           </div>
@@ -189,7 +189,7 @@ class AddView extends React.Component {
           <div className="col-md bg-dark bg-gradient text-white p-4">
             <h2>PRODUCT LIST</h2>
             <p>
-
+            The five latest new products are shown; newest first:
             </p>
             <ListProducts />
 

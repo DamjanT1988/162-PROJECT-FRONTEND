@@ -7,3 +7,76 @@ body {
   line-height: 2em;
   background-color: white;
 }
+
+input, textarea {
+  color: black;
+}
+
+#h3title {
+  font-weight: bolder;
+  font-size: 1.65em;
+}
+
+strong,
+h3 {
+  font-size: 1.4em;
+}
+
+label {
+  font-weight: bold;
+  font-size: 1.5em;
+}
+
+.btn-red {
+  background-color: red;
+  color: white;
+}
+
+.btn-light-red {
+  background-color: #F08784;
+  font-weight: bold;
+  font-size: 1.4em;
+}
+
+.btn-light-green {
+  background-color: #A1FB8E;
+  font-weight: bold;
+  font-size: 1.4em;
+}
+
+#messageUpdate {
+  color: green;
+  font-weight: bolder;
+  font-size: 2em;
+}
+
+#messageAdd {
+  color: green;
+  font-weight: bolder;
+  font-size: 2em;
+}
+
+#messageError {
+  color: red;
+  font-weight: bolder;
+  font-size: 2em;
+}
+
+/*home*/
+#responseLoginFail {
+  font-size: 1.5em;
+  font-weight: bolder;
+  color: red;
+}
+
+#responseLoginSuccess {
+  font-size: 1.5em;
+  font-weight: bolder;
+  color: green;
+}
+
+.responseUser {
+  font-size: 1.5em;
+  font-weight: bolder;
+  color: green;
+}

@@ -49,15 +49,20 @@ class Register extends React.Component {
             headers: {
                 "Accept": "application/json",
                 "Content-type": "application/json",
-                //"Access-Control-Allow-Origin": "http://localhost:3001"
+                "Access-Control-Allow-Origin": 'http://localhost:8080'
             },
-
+            mode: 'cors',
             //convert JS object to JSON object
-            body: JSON.stringify(keyBody)
+            //body: JSON.stringify(keyBody)
         });
 
+        var data = await respKey.json();
+
+        console.log(data._id)
+        console.log(respKey._id)
+
         //check if input key macthes with first database key
-        if (respKey[0]._id == this.state.userKey) {
+        if (data[0]._id == this.state.userKey) {
 
             //create a JS object
             let userBody = {
@@ -72,18 +77,21 @@ class Register extends React.Component {
                 headers: {
                     "Accept": "application/json",
                     "Content-type": "application/json",
-                    //"Access-Control-Allow-Origin": "http://localhost:3001"
+                    "Access-Control-Allow-Origin": 'http://localhost:8080'
                 },
+                mode: 'cors',
 
                 //convert JS object to JSON object
                 body: JSON.stringify(userBody)
             });
 
-            /*
+            
                 //store response
                 const data = resp.json();
-                const msg = data.message;
+                //const msg = data.message;
             
+                console.log(data)
+                /*
                 //check login
                 if (data.token == undefined) {
                   //no value
@@ -99,17 +107,18 @@ class Register extends React.Component {
                 } else {
                   document.getElementById("responseLoginFail").innerHTML = "Login fail";
                 }
-                //}
-              */
+                */
+            
 
             //clear form
-            //clear form
-            document.getElementById("nameUser").value = "";
+/*            document.getElementById("nameUser").value = "";
             document.getElementById("emailUser").value = "";
             document.getElementById("passwordUser").value = "";
             document.getElementById("keyUser").value = "";
-
+*/
         }
+
+//        window.location.reload(false);
     }
 
     render() {
@@ -162,7 +171,7 @@ class Register extends React.Component {
                 <input
                     type="submit"
                     value="Register!"
-                    className="btn btn-dark" />
+                    className="btn" />
 
                 <p id="responseLoginFail"></p>
                 <p id="responseLoginSuccess"></p>
@@ -208,65 +217,63 @@ class Login extends React.Component {
         //prevent reload
         event.preventDefault();
         //check if input
-        //if (this.state.emailUser.length > 0 || this.state.emailUser !== undefined) {
-        document.getElementById("responseLoginFail").innerHTML = "";
-        document.getElementById("responseLoginSuccess").innerHTML = "";
+        if (this.state.emailUser.length > 0 || this.state.emailUser !== undefined) {
+            document.getElementById("responseLoginFail").innerHTML = "";
+            document.getElementById("responseLoginSuccess").innerHTML = "";
 
-        //create a JS object
-        let userBody = {
-            email: this.state.emailUser,
-            password: this.state.passwordUser
-        };
+            //create a JS object
+            let userBody = {
+                email: this.state.emailUser,
+                password: this.state.passwordUser
+            };
 
-        //fetch("http://localhost:3001/users/").then(req => req.text()).then(console.log)
+            //send request to API 
+            const resp = await fetch("http://localhost:3000/users/login/", {
+                method: "POST",
+                headers: {
+                    "Accept": "application/json",
+                    "Content-type": "application/json",
+                    "Access-Control-Allow-Origin": 'http://localhost:8080'
+                },
+                mode: 'cors',
+                //convert JS object to JSON object
+                body: JSON.stringify(userBody)
+            });
 
-        //send request to API 
-        /* const resp = await fetch("http://localhost:3000/users/", {
-           method: "POST",
-           headers: {
-             "Accept": "application/json",
-             "Content-type": "application/json",
-             //"Access-Control-Allow-Origin": 'http://127.0.0.1:8080'
-           },
-     
-           //convert JS object to JSON object
-           body: JSON.stringify(userBody)
-         });
-     */
 
-        //clear form
-        //document.getElementById("emailUser").value = "";
-        //document.getElementById("passwordUser").value = "";
+            //clear form
+            //document.getElementById("emailUser").value = "";
+            //document.getElementById("passwordUser").value = "";
 
-    
-        //store response
-        const data = "63a204c0939718e70dae83c0";
-        const msg = data.message;
 
-        //test
-        document.cookie = "UserToken=" + data;
+            //store response
+            const data = await resp.json();
 
-        //reload page for header to appear
-        window.location.reload(false);
 
-        /*
-        //check login
-        if (data.token == undefined) {
-          //no value
-          document.cookie = "UserToken=";
-        } else {
-          //add value
-          document.cookie = "UserToken=" + data.token;
+            //test
+            document.cookie = "UserToken=" + data.token;
+
+
+            //check login
+            if (data.token == undefined) {
+                //no value
+                document.cookie = "UserToken=";
+            } else {
+                //add value
+                document.cookie = "UserToken=" + data.token;
+            }
+
+            if (data.message == "Login approved!") {
+                // print message
+                document.getElementById("responseLoginSuccess").innerHTML = "Login success ";
+            } else {
+                document.getElementById("responseLoginFail").innerHTML = "Login fail";
+            }
+
+            //reload page for header to appear
+            window.location.reload(false);
         }
-    
-        if (msg == "Användare inloggad!") {
-          // print message
-          document.getElementById("responseLoginSuccess").innerHTML = "Login success ";
-        } else {
-          document.getElementById("responseLoginFail").innerHTML = "Login fail";
-        }
-        //}
-      */
+
 
     }
 
@@ -298,7 +305,7 @@ class Login extends React.Component {
                 <input
                     type="submit"
                     value="Log in!"
-                    className="btn btn-dark" />
+                    className="btn" />
 
                 <p id="responseLoginFail"></p>
                 <p id="responseLoginSuccess"></p>

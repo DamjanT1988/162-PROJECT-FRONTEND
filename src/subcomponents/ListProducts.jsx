@@ -17,7 +17,6 @@ class ProductItem extends React.Component {
     increaseUp(e) {
 
         this.props.onIncrease(e.target.id, e.target.name);
-    
         document.getElementById("storage").innerHTML = ++e.target.name
     }
 
@@ -125,8 +124,6 @@ class ListProductsClass extends React.Component {
             this.setState({
               data: data
            })
-            //    this.state.data = data;
-            console.log(data)   
     }) 
     }
 
