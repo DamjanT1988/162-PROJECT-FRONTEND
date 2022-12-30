@@ -35,16 +35,16 @@ class Register extends React.Component {
         event.preventDefault();
         //check if input
         //if (this.state.emailUser.length > 0 || this.state.emailUser !== undefined) {
-        document.getElementById("responseLoginFail").innerHTML = "";
-        document.getElementById("responseLoginSuccess").innerHTML = "";
+        //document.getElementById("responseLoginFail").innerHTML = "";
+        //document.getElementById("responseLoginSuccess").innerHTML = "";
 
         //create a JS object
-        let keyBody = {
+        /*let keyBody = {
             key: this.state.keyUser,
-        };
+        };*/
 
         //send request to API 
-        const respKey = await fetch("http://localhost:3000/keys/", {
+        /*const respKey = await fetch("http://localhost:3000/keys/", {
             method: "GET",
             headers: {
                 "Accept": "application/json",
@@ -56,13 +56,16 @@ class Register extends React.Component {
             //body: JSON.stringify(keyBody)
         });
 
-        var data = await respKey.json();
+        //var data = await respKey;
 
-        console.log(data._id)
+        //console.log(data._id)
         console.log(respKey._id)
+        */
+
 
         //check if input key macthes with first database key
-        if (data[0]._id == this.state.userKey) {
+        
+        //if (respKey[0]._id == this.state.userKey) {
 
             //create a JS object
             let userBody = {
@@ -87,39 +90,40 @@ class Register extends React.Component {
 
             
                 //store response
-                const data = resp.json();
+                const data = await resp.json();
                 //const msg = data.message;
             
-                console.log(data)
-                /*
+            console.log(data)
+
                 //check login
-                if (data.token == undefined) {
+                if (data._id == undefined) {
                   //no value
                   document.cookie = "UserToken=";
                 } else {
                   //add value
-                  document.cookie = "UserToken=" + data.token;
+                  document.cookie = "UserToken=" + data._id;
                 }
             
-                if (msg == "Användare inloggad!") {
+                if (data._id == undefined) {
                   // print message
-                  document.getElementById("responseLoginSuccess").innerHTML = "Login success ";
+                  document.getElementById("responseLoginFail2").innerHTML = "Registration fail";
                 } else {
-                  document.getElementById("responseLoginFail").innerHTML = "Login fail";
-                }
-                */
-            
+                    document.getElementById("responseLoginSuccess2").innerHTML = "Registration success ";
 
+                }
+                
+        
             //clear form
-/*            document.getElementById("nameUser").value = "";
+            document.getElementById("nameUser").value = "";
             document.getElementById("emailUser").value = "";
             document.getElementById("passwordUser").value = "";
             document.getElementById("keyUser").value = "";
-*/
+
+            //window.location.reload(false);
+
         }
 
-//        window.location.reload(false);
-    }
+    
 
     render() {
         return (
@@ -173,8 +177,8 @@ class Register extends React.Component {
                     value="Register!"
                     className="btn" />
 
-                <p id="responseLoginFail"></p>
-                <p id="responseLoginSuccess"></p>
+                <p id="responseLoginFail2"></p>
+                <p id="responseLoginSuccess2"></p>
             </form>
         );
     }
