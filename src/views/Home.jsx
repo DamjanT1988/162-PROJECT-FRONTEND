@@ -33,6 +33,7 @@ class Register extends React.Component {
     async registerUser(event) {
         //prevent reload
         event.preventDefault();
+
         //check if input
         /*
         if (this.state.emailUser.length > 0 || this.state.emailUser !== undefined) {
@@ -40,7 +41,7 @@ class Register extends React.Component {
         document.getElementById("responseLoginSuccess").innerHTML = "";
 
         //send request to API 
-        const respKey = await fetch("http://localhost:3000/keys/", {
+        const resp = await fetch("http://localhost:3000/keys/", {
             method: "GET",
             headers: {
                 "Accept": "application/json",
@@ -50,69 +51,70 @@ class Register extends React.Component {
             mode: 'cors'
         });
 
-        var data = await respKey;
+        var data = await resp.json();
 
         console.log(data._id)
-        console.log(respKey._id)
+        console.log(resp._id)
         
         //check if input key macthes with first database key
-        if (respKey[0]._id == this.state.userKey) {
+        if (resp[0]._id == this.state.userKey) {
         */
-        
-            //create a JS object
-            let userBody = {
-                name: this.state.nameUser,
-                email: this.state.emailUser,
-                password: this.state.passwordUser
-            };
 
-            //send request to API 
-            const resp = await fetch("http://localhost:3000/users/", {
-                method: "POST",
-                headers: {
-                    "Accept": "application/json",
-                    "Content-type": "application/json",
-                    "Access-Control-Allow-Origin": 'http://localhost:8080'
-                },
-                mode: 'cors',
-                //convert JS object to JSON object
-                body: JSON.stringify(userBody)
-            });
+        //create a JS object
+        let userBody = {
+            name: this.state.nameUser,
+            email: this.state.emailUser,
+            password: this.state.passwordUser
+        };
 
-            
-                //store response
-                const data = await resp.json();
-                //const msg = data.message;
-            
-                //check login
-                if (data._id == undefined) {
-                  //no value
-                  document.cookie = "UserToken=";
-                } else {
-                  //add value
-                  document.cookie = "UserToken=" + data._id;
-                }
-            
-                if (data._id == undefined) {
-                  // print message
-                  document.getElementById("responseLoginFail2").innerHTML = "Registration fail!";
-                } else {
-                    document.getElementById("responseLoginSuccess2").innerHTML = "Registration success! Menu will appear..";
+        //send request to API 
+        const resp = await fetch("http://localhost:3000/users/", {
+            method: "POST",
+            headers: {
+                "Accept": "application/json",
+                "Content-type": "application/json",
+                "Access-Control-Allow-Origin": 'http://localhost:8080'
+            },
+            mode: 'cors',
+            //convert JS object to JSON object
+            body: JSON.stringify(userBody)
+        });
 
-                }
-                
-        
-            //clear form
-            document.getElementById("nameUser").value = "";
-            document.getElementById("emailUser").value = "";
-            document.getElementById("passwordUser").value = "";
-            document.getElementById("keyUser").value = "";
 
-            //reload page for header to appear, wait 2 seconds
-            //setTimeout(() => {window.location.reload(false)}, 2000);
-        //}
+        //store response
+        const data = await resp.json();
+        const msg = data.message;
+
+        //console.log(data)
+        /*
+        //check login
+        if (data._id == undefined) {
+            //no value
+            document.cookie = "UserToken=";
+        } else {
+            //add value
+            document.cookie = "UserToken=" + data._id;
+        }
+        */
+
+        if (msg == undefined) {
+            // print message
+            document.getElementById("responseLoginFail2").innerHTML = "Registration fail!";
+        } else {
+            document.getElementById("responseLoginSuccess2").innerHTML = "Registration success! Please log in..";
+
+        }
+
+        //clear form
+        document.getElementById("nameUser").value = "";
+        document.getElementById("emailUser").value = "";
+        document.getElementById("passwordUser").value = "";
+        document.getElementById("keyUser").value = "";
+
+        //reload page for header to appear, wait 2 seconds
+        //setTimeout(() => { window.location.reload(false) }, 2000);
     }
-    
+
 
     render() {
         return (
@@ -210,7 +212,7 @@ class Login extends React.Component {
         //prevent reload
         event.preventDefault();
         //check if input
-        if (this.state.emailUser.length > 0 || this.state.emailUser !== undefined) {
+        if (this.state.emailUser.length !== 0 && this.state.emailUser !== 0) {
             document.getElementById("responseLoginFail").innerHTML = "";
             document.getElementById("responseLoginSuccess").innerHTML = "";
 
@@ -264,10 +266,10 @@ class Login extends React.Component {
             }
 
             //reload page for header to appear, wait 2 seconds
-            setTimeout(() => {window.location.reload(false)}, 2000);
+            setTimeout(() => { window.location.reload(false) }, 2000);
+        } else {
+            document.getElementById("responseLoginFail").innerHTML = "Empty fields!";
         }
-
-
     }
 
     render() {
@@ -298,7 +300,7 @@ class Login extends React.Component {
                 <input
                     type="submit"
                     value="Log in!"
-                    className="btn btn btn-lg" />
+                    className="btn btn-lg" />
 
                 <p id="responseLoginFail"></p>
                 <p id="responseLoginSuccess"></p>
