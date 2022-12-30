@@ -98,6 +98,7 @@ class SearchProduct extends React.Component {
 /*******************************************************************************************/
 // CHILD COMPONENT: SEARCHARTICLE
 
+/*
 class SearchArticle extends React.Component {
     constructor(props) {
         super(props);
@@ -134,27 +135,29 @@ class SearchArticle extends React.Component {
         console.log(this.state._id);
 
         const id = this.state._id
-        /*        
-        const resp = await fetch("http://localhost:3000/products/" + id, {
-                    method: "GET",
-                    headers: {
-                        "Accept": "application/json",
-                        "Content-type": "application/json"
-                    }
-                })
-    
-                // svar från api, lagra i data
-                const data = await resp.json();
-    
-                // lagra listan
-                this.product = data;
-            }
-        }*/
 
+        const resp = await fetch("http://localhost:3000/products/" + id, {
+            method: "GET",
+            headers: {
+                "Accept": "application/json",
+                "Content-type": "application/json"
+            }
+        })
+
+        const data = await resp.json();
+
+        //this.product = data;
+
+        console.log(data)
         this.setState({
-            _id: ""
-        }
-        )
+            _id: "",
+            product_title: data.product_title,
+            ean_number: data.ean_number,
+            product_description: data.product_description,
+            price: data.price,
+            amount_storage: data.amount_storage,
+            expiration_date: data.expiration_date
+        })
     }
 
     render() {
@@ -165,7 +168,7 @@ class SearchArticle extends React.Component {
                     type="text"
                     placeholder="article number"
                     className="form-control-lg"
-                    value={this.state._id}   //prop from parent
+                    value={this.state._id}          //prop from parent
                     onChange={this.handleEvent}     //event listener; call method
                 />
                 <p
@@ -183,6 +186,7 @@ class SearchArticle extends React.Component {
         )
     }
 }
+*/
 
 // END OF CHILD COMPONENT: SEARCHARTICLE
 /*******************************************************************************************/
@@ -196,6 +200,7 @@ class EditProducts extends React.Component {
         super(props);
         //set initial state
         this.state = {
+            _id: '',
             product_title: '',
             ean_number: '',
             product_description: '',
@@ -206,7 +211,8 @@ class EditProducts extends React.Component {
 
         //bind methods/functions
         this.handleEvent = this.handleEvent.bind(this);
-        this.addProduct = this.addProduct.bind(this);
+        this.updateProduct = this.updateProduct.bind(this);
+        this.getProductsById = this.getProductsById.bind(this);
     }
 
     //save the input value and update state
@@ -220,56 +226,105 @@ class EditProducts extends React.Component {
         });
     }
 
-    async addProduct(event) {
+    async updateProduct(event) {
         event.preventDefault();
-        // kontroll att något fylls i
-        if (this.state.product_title.length > 0 && this.state.ean_number > 0) {
+                if (this.state.product_title.length > 0 && this.state.ean_number.length > 0) {
 
-            // skapa en JS-objekt att skicka med
-            let productBody = {
-                product_title: this.state.product_title,
-                ean_number: this.state.ean_number,
-                product_description: this.state.product_description,
-                price: this.state.price,
-                amount_storage: this.state.amount_storage,
-                expiration_date: this.state.expiration_date,
-            };
+        let productBody = {
+            product_title: this.state.product_title,
+            ean_number: this.state.ean_number,
+            product_description: this.state.product_description,
+            price: this.state.price,
+            amount_storage: this.state.amount_storage,
+            expiration_date: this.state.expiration_date,
+        };
 
-            console.log(productBody)
+        console.log(productBody)
 
-            /*
-      const resp = await fetch("http://localhost:3000/products/", {
-      method: "POST",
-      headers: {
-        "Accept": "application/json",
-        "Content-type": "application/json"
-      },
-      // omvandla JS-objekt till JSON
-      body: JSON.stringify(productBody)
-      });*/
+        const id = this.state._id
 
-            document.getElementById("messageError").innerHTML = ""
-            document.getElementById("messageAdd").innerHTML = "Product added!"
-        } else {
+        console.log(id)
 
-            document.getElementById("messageError").innerHTML = "Title/EAN number must be filled"
-        }
+        const resp = await fetch("http://localhost:3000/products/" + id, {
+            method: "PUT",
+            headers: {
+                "Accept": "application/json",
+                "Content-type": "application/json"
+            },
+            credentials: 'same-origin',
+            body: JSON.stringify(productBody)
+        })
+
+        console.log(resp)
+
+        
+                   document.getElementById("messageError").innerHTML = ""
+                    document.getElementById("messageAdd").innerHTML = "Product updated!"
+                } else {
+        
+                    document.getElementById("messageError").innerHTML = "Title/EAN number must be filled"
+                }
+        
+        window.location.reload(false);
+    }
+
+    async getProductsById(event) {
+        event.preventDefault();
+
+        console.log(this.state._id);
+
+        const id = this.state._id
+
+        const resp = await fetch("http://localhost:3000/products/" + id, {
+            method: "GET",
+            headers: {
+                "Accept": "application/json",
+                "Content-type": "application/json"
+            }
+        })
+
+        const data = await resp.json();
 
         this.setState({
-            product_title: "",
-            ean_number: "",
-            product_description: "",
-            price: "",
-            amount_storage: "",
-            expiration_date: ""
+            _id: data._id,
+            product_title: data.product_title,
+            ean_number: data.ean_number,
+            product_description: data.product_description,
+            price: data.price,
+            amount_storage: data.amount_storage,
+            expiration_date: data.expiration_date
         })
     }
 
-
     render() {
         return (
+
             <div>
-                <form onSubmit={this.addProduct} id="formAdd">
+                <form onSubmit={this.getProductsById} id="searchEdit">
+                    <input
+                        name="_id"
+                        type="text"
+                        placeholder="article number"
+                        className="form-control-lg"
+                        value={this.state._id}          //prop from parent
+                        onChange={this.handleEvent}     //event listener; call method
+                    />
+                    <p
+                        hidden
+                        className="hidden"
+                        id="id">
+                    </p>
+                    <br />
+                    <input
+                        type="submit"
+                        value="Get article!"
+                        className="btn btn-dark" />
+                    <br /><br />
+                </form>
+
+
+
+                <form onSubmit={this.updateProduct} id="formAdd">
                     <label className="form-control-lg">Product title:</label>
                     <br />
                     <input
@@ -368,7 +423,6 @@ class EditView extends React.Component {
                             Search for the article product number for edit: if no result then the article number does not exist. Edit of
                             article number might write over existing article.
                         </p>
-                        <SearchArticle />
 
                         <EditProducts />
                     </div>
