@@ -120,7 +120,7 @@ class ProductItem extends React.Component {
 /*******************************************************************************************/
 // PARENT SUBCOMPONENT: PRODUCTSLIST
 
-class ListProductsClass extends React.Component {
+class ListProducts extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -216,13 +216,13 @@ class ListProductsClass extends React.Component {
 // END OF PRODUCTSLIST SUBCOMPONENT
 /*******************************************************************************************/
 
-function ListProducts() {
+function List() {
 
     //View components
     return (
-        <ListProductsClass />
+        <ListProducts />
     );
 }
 
 
-export default ListProducts;
+export default List;

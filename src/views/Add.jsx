@@ -36,7 +36,6 @@ class AddProducts extends React.Component {
   async addProduct(event) {
     event.preventDefault();
 
-
     if (this.state.product_title.length > 0 && this.state.ean_number.length > 0) {
 
       let productBody = {
@@ -48,7 +47,6 @@ class AddProducts extends React.Component {
         expiration_date: this.state.expiration_date,
       };
 
-
       const resp = await fetch("http://localhost:3000/products/", {
         method: "POST",
         headers: {
@@ -59,7 +57,6 @@ class AddProducts extends React.Component {
         mode: 'cors',
         body: JSON.stringify(productBody)
       });
-
 
       document.getElementById("messageError").innerHTML = ""
       document.getElementById("messageAdd").innerHTML = "Product added!"

@@ -55,7 +55,7 @@ class Register extends React.Component {
 
         console.log(data._id)
         console.log(resp._id)
-        
+    
         //check if input key macthes with first database key
         if (resp[0]._id == this.state.userKey) {
         */
@@ -85,18 +85,6 @@ class Register extends React.Component {
         const data = await resp.json();
         const msg = data.message;
 
-        //console.log(data)
-        /*
-        //check login
-        if (data._id == undefined) {
-            //no value
-            document.cookie = "UserToken=";
-        } else {
-            //add value
-            document.cookie = "UserToken=" + data._id;
-        }
-        */
-
         if (msg == undefined) {
             // print message
             document.getElementById("responseLoginFail2").innerHTML = "Registration fail!";
@@ -110,9 +98,6 @@ class Register extends React.Component {
         document.getElementById("emailUser").value = "";
         document.getElementById("passwordUser").value = "";
         document.getElementById("keyUser").value = "";
-
-        //reload page for header to appear, wait 2 seconds
-        //setTimeout(() => { window.location.reload(false) }, 2000);
     }
 
 
@@ -236,18 +221,11 @@ class Login extends React.Component {
             });
 
 
-            //clear form
-            //document.getElementById("emailUser").value = "";
-            //document.getElementById("passwordUser").value = "";
-
-
             //store response
             const data = await resp.json();
 
-
-            //test
+            //save cookie
             document.cookie = "UserToken=" + data.token;
-
 
             //check login
             if (data.token == undefined) {
