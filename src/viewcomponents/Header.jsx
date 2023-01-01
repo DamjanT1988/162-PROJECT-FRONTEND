@@ -30,7 +30,7 @@ function Navbar() {
         <header id="header" className="row">
             <div>
                 <Header />
-                <br /><br /><br /><br />
+                <br />
                 <nav className="navbar fixed-top navbar-dark bg-dark bg-gradient d-flex justify-content-center">
                     <Link to="/" className="m-1 btn btn-light text-decoration-none">START</Link>
                     <Link to="/Add" className="m-1 btn btn-light text-decoration-none">ADD</Link>

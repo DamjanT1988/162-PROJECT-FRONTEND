@@ -326,7 +326,9 @@ function Home() {
 
     //View components
     return (
+        <div><h1>START</h1>
         <StartView />
+        </div>
     );
 }
 

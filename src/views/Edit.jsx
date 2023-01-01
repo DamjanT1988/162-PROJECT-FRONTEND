@@ -15,7 +15,6 @@ class SearchProduct extends React.Component {
         //bind methods/functions
         this.handleEvent = this.handleEvent.bind(this);
         this.searchProduct = this.searchProduct.bind(this);
-        this.reloadNow = this.reloadNow.bind(this);
     }
 
     //save the input value and update state
@@ -29,11 +28,7 @@ class SearchProduct extends React.Component {
         });
     }
 
-    reloadNow(e) {
-        this.props.reload;
-    }
-
-    // sök product-funktion
+    // 
     async searchProduct(event) {
 
         event.preventDefault();
@@ -55,6 +50,8 @@ class SearchProduct extends React.Component {
                 x[i].style.display = "item";
             }
         }
+
+        document.getElementById("searchbar").value = ""
     }
 
 
@@ -78,12 +75,12 @@ class SearchProduct extends React.Component {
                         onChange={this.handleEvent}
                         onClick={this.searchProduct} />
                     <br /><br />
+                </form>
+                <form>
                     <input
                         type="submit"
                         className="btn btn-lg"
-                        value="Reload list!"
-                        onChange={this.handleEvent}
-                        onClick={this.reloadNow} />
+                        value="Reload list!" />
                     <br /><br />
                 </form>
             </div>
@@ -128,9 +125,29 @@ class EditProducts extends React.Component {
         });
     }
 
-    reloadList() {
+    async getProductsById(event) {
+        event.preventDefault();
+
+        const id = this.state._id
+
+        const resp = await fetch("http://localhost:3000/products/" + id, {
+            method: "GET",
+            headers: {
+                "Accept": "application/json",
+                "Content-type": "application/json"
+            }
+        })
+
+        const data = await resp.json();
+
         this.setState({
-            id: ""
+            _id: data._id,
+            product_title: data.product_title,
+            ean_number: data.ean_number,
+            product_description: data.product_description,
+            price: data.price,
+            amount_storage: data.amount_storage,
+            expiration_date: data.expiration_date
         })
     }
 
@@ -167,35 +184,7 @@ class EditProducts extends React.Component {
         }
 
         this.setState({
-            id: ""
-        })
-    }
-
-    async getProductsById(event) {
-        event.preventDefault();
-
-        console.log(this.state._id);
-
-        const id = this.state._id
-
-        const resp = await fetch("http://localhost:3000/products/" + id, {
-            method: "GET",
-            headers: {
-                "Accept": "application/json",
-                "Content-type": "application/json"
-            }
-        })
-
-        const data = await resp.json();
-
-        this.setState({
-            _id: data._id,
-            product_title: data.product_title,
-            ean_number: data.ean_number,
-            product_description: data.product_description,
-            price: data.price,
-            amount_storage: data.amount_storage,
-            expiration_date: data.expiration_date
+            _id: ""
         })
     }
 
@@ -315,15 +304,15 @@ class EditProducts extends React.Component {
                                 Search a product by any key word (like product name or #1 article number) and view the result below; or view the whole list
                                 below without search; reload to search the whole list again:
                             </p>
-                            <SearchProduct key={this.state.id} reload={this.reloadList} />
+                            <SearchProduct />
                             <p>
                                 Newest product shown first:
                             </p>
-                            <ListProducts key={this.state.id} />
+                            <ListProducts key={this.state._id} />
                         </div>
                     </div>
                 </div>
-            );
+            )
         }
     }
 }
@@ -338,7 +327,9 @@ class EditProducts extends React.Component {
 class EditView extends React.Component {
     render() {
         return (
+            <div><h1>EDIT</h1>
             <EditProducts />
+            </div>
         )
     }
 }

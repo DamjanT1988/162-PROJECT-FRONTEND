@@ -36,7 +36,14 @@ class AddProducts extends React.Component {
   async addProduct(event) {
     event.preventDefault();
 
-    if (this.state.product_title.length > 0 && this.state.ean_number.length > 0) {
+    if (
+      this.state.product_title.length > 0 && 
+      this.state.ean_number.length > 0 &&
+      this.state.product_description.length > 0 &&
+      this.state.price.length > 0 &&
+      this.state.amount_storage.length > 0 &&
+      this.state.expiration_date.length > 0
+      ) {
 
       let productBody = {
         product_title: this.state.product_title,
@@ -60,23 +67,25 @@ class AddProducts extends React.Component {
 
       document.getElementById("messageError").innerHTML = ""
       document.getElementById("messageAdd").innerHTML = "Product added!"
+
+      this.setState({
+        id:"",
+        product_title: "",
+        ean_number: "",
+        product_description: "",
+        price: "",
+        amount_storage: "",
+        expiration_date: ""
+      })
     } else {
 
-      document.getElementById("messageError").innerHTML = "Title/EAN number must be filled"
+      document.getElementById("messageError").innerHTML = "All fields must be filled"
     }
-
-    this.setState({
-      id:"",
-      product_title: "",
-      ean_number: "",
-      product_description: "",
-      price: "",
-      amount_storage: "",
-      expiration_date: ""
-    })
   }
 
   render() {
+
+    document.getElementsByClassName="" 
 
     //check if a cookie value exist/logged in user
     if (document.cookie === 'UserToken=' || document.cookie === '') {
@@ -175,6 +184,8 @@ class AddProducts extends React.Component {
             </div>
           </div>
         </div>
+
+
       )
     }
   }
@@ -192,7 +203,9 @@ class AddView extends React.Component {
 
   render() {
     return (
+      <div><h1>ADD</h1>
       <AddProducts />
+      </div>
     )
   }
 }
