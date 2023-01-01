@@ -98,7 +98,7 @@ class AddProducts extends React.Component {
           <div className="row">
             <div className="col-md bg-dark bg-gradient text-white p-4">
 
-              <h2>ADD PRODUCT</h2>
+              <h2 className='display-4'>ADD PRODUCT</h2>
               <p>
                 Add a new product article below; title and EAN number must be filled:
               </p>
@@ -176,7 +176,7 @@ class AddProducts extends React.Component {
             </div>
 
             <div className="col-md bg-dark bg-gradient text-white p-4">
-              <h2>PRODUCT LIST</h2>
+              <h2 className='display-4'>PRODUCT LIST</h2>
               <p>
                 The five latest new products are shown; newest first:
               </p>
@@ -203,7 +203,7 @@ class AddView extends React.Component {
 
   render() {
     return (
-      <div><h1>ADD</h1>
+      <div><h1 className='display-3'>ADD</h1>
       <AddProducts />
       </div>
     )

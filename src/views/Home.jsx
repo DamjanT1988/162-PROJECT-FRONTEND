@@ -299,7 +299,7 @@ class StartView extends React.Component {
         return (
             <div className="row">
                 <div className="col-md bg-dark bg-gradient text-white p-4">
-                    <h2>LOG IN</h2>
+                    <h2 className='display-4'>LOG IN</h2>
                     <p>
                         Log in below, then navigate through the buttons in top.
                     </p>
@@ -307,7 +307,7 @@ class StartView extends React.Component {
                 </div>
 
                 <div className="col-md bg-dark bg-gradient text-white p-4">
-                    <h2>REGISTER</h2>
+                    <h2 className='display-4'>REGISTER</h2>
                     <p>
                         Register below. Navigate above. The key is used by the employer.
                     </p>
@@ -326,7 +326,7 @@ function Home() {
 
     //View components
     return (
-        <div><h1>START</h1>
+        <div><h1 className='display-3'>START</h1>
         <StartView />
         </div>
     );

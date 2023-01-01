@@ -198,7 +198,7 @@ class EditProducts extends React.Component {
                     <div className="row">
                         <div className="col-md bg-dark bg-gradient text-white p-4">
 
-                            <h2>EDIT AN ARTICLE</h2>
+                            <h2 className='display-4'>EDIT AN ARTICLE</h2>
                             <p>
                                 Search for the article product number for edit: if no result then the article number does not exist. Edit of
                                 article number might write over existing article:
@@ -299,7 +299,7 @@ class EditProducts extends React.Component {
                         </div>
 
                         <div className="col-md bg-dark bg-gradient text-white p-4">
-                            <h2>ALL PRODUCTS VIEW</h2>
+                            <h2 className='display-4'>ALL PRODUCTS VIEW</h2>
                             <p>
                                 Search a product by any key word (like product name or #1 article number) and view the result below; or view the whole list
                                 below without search; reload to search the whole list again:
@@ -327,7 +327,7 @@ class EditProducts extends React.Component {
 class EditView extends React.Component {
     render() {
         return (
-            <div><h1>EDIT</h1>
+            <div><h1 className='display-3'>EDIT</h1>
             <EditProducts />
             </div>
         )

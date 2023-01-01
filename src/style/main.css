@@ -27,10 +27,19 @@ h1 {
   text-align: center;
 }
 
-
-article, form, h2, p {
+h2 {
   text-align: center;
-  font-size: 1.25em;
+  font-size: 2em;
+}
+
+article, form {
+  text-align: center;
+  font-size: 1.5em;
+}
+
+p {
+  text-align: center;
+  font-size: 2em;
 }
 
 label {
