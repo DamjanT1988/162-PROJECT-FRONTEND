@@ -35,7 +35,7 @@ class Register extends React.Component {
         event.preventDefault();
 
         //check if input
-        /*
+        
         if (this.state.emailUser.length > 0 || this.state.emailUser !== undefined) {
         document.getElementById("responseLoginFail").innerHTML = "";
         document.getElementById("responseLoginSuccess").innerHTML = "";
@@ -53,12 +53,8 @@ class Register extends React.Component {
 
         var data = await resp.json();
 
-        console.log(data._id)
-        console.log(resp._id)
-    
         //check if input key macthes with first database key
-        if (resp[0]._id == this.state.userKey) {
-        */
+        if (data[0].key == this.state.keyUser) {        
 
         //create a JS object
         let userBody = {
@@ -94,12 +90,12 @@ class Register extends React.Component {
         }
 
         //clear form
-        document.getElementById("nameUser").value = "";
-        document.getElementById("emailUser").value = "";
-        document.getElementById("passwordUser").value = "";
-        document.getElementById("keyUser").value = "";
+        //document.getElementById("nameUser").value = "";
+        //document.getElementById("emailUser").value = "";
+        //document.getElementById("passwordUser").value = "";
+        //document.getElementById("keyUser").value = "";
     }
-
+        }}
 
     render() {
         return (
