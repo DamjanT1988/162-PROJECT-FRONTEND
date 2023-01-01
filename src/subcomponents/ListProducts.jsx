@@ -70,7 +70,6 @@ class ProductItem extends React.Component {
 
                 <strong>Amount in storage:</strong>
                 <p id="storage">{product.amount_storage}</p>
-
                 <input
                     type="submit"
                     value="+1 storage"
@@ -87,7 +86,7 @@ class ProductItem extends React.Component {
                     className="btn btn-light-red lager"
                     onClick={this.decreaseDown}
                 />
-                <br />
+                <br /><br />
                 <strong>Expiration date:</strong>
                 <p>{product.expiration_date}</p>
 
@@ -99,7 +98,6 @@ class ProductItem extends React.Component {
 
                 <strong>Update version:</strong>
                 <p>{product.__v}</p>
-
                 <br />
                 <input
                     type="button"
@@ -109,7 +107,6 @@ class ProductItem extends React.Component {
                     onClick={this.deleteProduct} />
 
                 <p id="deletedMessage"></p>
-
             </article>
         );
     }
@@ -150,7 +147,6 @@ class ListProducts extends React.Component {
                 })
             })
     }
-
 
     async increase(id, amount) {
         const amountComp = ++amount;

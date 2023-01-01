@@ -66,6 +66,7 @@ class AddProducts extends React.Component {
     }
 
     this.setState({
+      id:"",
       product_title: "",
       ean_number: "",
       product_description: "",
@@ -73,88 +74,112 @@ class AddProducts extends React.Component {
       amount_storage: "",
       expiration_date: ""
     })
-
-    window.location.reload(false)
   }
-
 
   render() {
-    return (
-      <div>
-        <form onSubmit={this.addProduct} id="formAdd">
-          <label className="form-control-lg">Product title:</label>
-          <br />
-          <input
-            name="product_title"
-            type="text"
-            className="form-control-lg"
-            value={this.state.product_title}
-            onChange={this.handleEvent} />
-          <br />
-          <label className="form-control-lg">EAN number:</label>
-          <br />
-          <input
-            name="ean_number"
-            type="text"
-            className="form-control-lg"
-            value={this.state.ean_number}
-            onChange={this.handleEvent}
-          />
-          <br />
-          <label className="form-control-lg">Product description:</label>
-          <br />
-          <textarea
-            name="product_description"
-            type="text"
-            placeholder="max 200 words"
-            className="form-control-lg"
-            rows="3"
-            max-rows="6"
-            value={this.state.product_description}
-            onChange={this.handleEvent}>
-          </textarea>
-          <br />
-          <label className="form-control-lg">Selling price:</label>
-          <br />
-          <input
-            name="price"
-            type="number"
-            className="form-control-lg"
-            value={this.state.price}
-            onChange={this.handleEvent}
-          />
-          <br />
-          <label className="form-control-lg">Amount in storage:</label>
-          <br />
-          <input
-            name="amount_storage"
-            type="number"
-            className="form-control-lg"
-            value={this.state.amount_storage}
-            onChange={this.handleEvent} />
-          <br />
-          <label className="form-control-lg">Expiration date (earliest):</label>
-          <br />
-          <input
-            name="expiration_date"
-            type="text"
-            placeholder="yyyy-mm-dd"
-            className="form-control-lg"
-            value={this.state.expiration_date}
-            onChange={this.handleEvent} />
-          <br /><br />
-          <input
-            type="submit"
-            value="Add product!"
-            className="btn btn-lg" />
-        </form>
-        <br />
-        <p id="messageAdd"></p>
-        <p id="messageError"></p>
-      </div>
-    );
+
+    //check if a cookie value exist/logged in user
+    if (document.cookie === 'UserToken=' || document.cookie === '') {
+      window.location = '/';
+    } else {
+      //render if token has value
+      return (
+        <div>
+
+          <div className="row">
+            <div className="col-md bg-dark bg-gradient text-white p-4">
+
+              <h2>ADD PRODUCT</h2>
+              <p>
+                Add a new product article below; title and EAN number must be filled:
+              </p>
+
+              <form onSubmit={this.addProduct} id="formAdd">
+                <label className="form-control-lg">Product title:</label>
+                <br />
+                <input
+                  name="product_title"
+                  type="text"
+                  className="form-control-lg"
+                  value={this.state.product_title}
+                  onChange={this.handleEvent} />
+                <br />
+                <label className="form-control-lg">EAN number:</label>
+                <br />
+                <input
+                  name="ean_number"
+                  type="text"
+                  className="form-control-lg"
+                  value={this.state.ean_number}
+                  onChange={this.handleEvent}
+                />
+                <br />
+                <label className="form-control-lg">Product description:</label>
+                <br />
+                <textarea
+                  name="product_description"
+                  type="text"
+                  placeholder="max 200 words"
+                  className="form-control-lg"
+                  rows="3"
+                  max-rows="6"
+                  value={this.state.product_description}
+                  onChange={this.handleEvent}>
+                </textarea>
+                <br />
+                <label className="form-control-lg">Selling price:</label>
+                <br />
+                <input
+                  name="price"
+                  type="number"
+                  className="form-control-lg"
+                  value={this.state.price}
+                  onChange={this.handleEvent}
+                />
+                <br />
+                <label className="form-control-lg">Amount in storage:</label>
+                <br />
+                <input
+                  name="amount_storage"
+                  type="number"
+                  className="form-control-lg"
+                  value={this.state.amount_storage}
+                  onChange={this.handleEvent} />
+                <br />
+                <label className="form-control-lg">Expiration date (earliest):</label>
+                <br />
+                <input
+                  name="expiration_date"
+                  type="text"
+                  placeholder="yyyy-mm-dd"
+                  className="form-control-lg"
+                  value={this.state.expiration_date}
+                  onChange={this.handleEvent} />
+                <br /><br />
+                <input
+                  type="submit"
+                  value="Add product!"
+                  className="btn btn-lg" />
+              </form>
+              <br />
+              <p id="messageAdd"></p>
+              <p id="messageError"></p>
+            </div>
+
+            <div className="col-md bg-dark bg-gradient text-white p-4">
+              <h2>PRODUCT LIST</h2>
+              <p>
+                The five latest new products are shown; newest first:
+              </p>
+              <ListProducts key={this.state.id} />
+            </div>
+          </div>
+        </div>
+      )
+    }
   }
 }
+
 
 // END OF LOGIN COMPONENT
 /*******************************************************************************************/
@@ -166,36 +191,12 @@ class AddProducts extends React.Component {
 class AddView extends React.Component {
 
   render() {
-
-    //check if a cookie value exist/logged in user
-    if (document.cookie === 'UserToken=' || document.cookie === '') {
-      window.location = '/';
-    } else {
-      //render if token has value
-      return (
-        <div className="row">
-          <div className="col-md bg-dark bg-gradient text-white p-4">
-
-            <h2>ADD PRODUCT</h2>
-            <p>
-              Add a new product article below; title and EAN number must be filled:
-            </p>
-            <AddProducts />
-          </div>
-
-          <div className="col-md bg-dark bg-gradient text-white p-4">
-            <h2>PRODUCT LIST</h2>
-            <p>
-              The five latest new products are shown; newest first:
-            </p>
-            <ListProducts />
-
-          </div>
-        </div>
-      )
-    }
+    return (
+      <AddProducts />
+    )
   }
 }
+
 
 // END OF STARTVIEW COMPONENT
 /*******************************************************************************************/
