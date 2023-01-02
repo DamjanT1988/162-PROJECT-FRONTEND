@@ -33,7 +33,7 @@ class SearchProduct extends React.Component {
 
         event.preventDefault();
 
-        let input = document.getElementById('searchbar').value
+        let input = this.state.search_word;
 
         input = input.toLowerCase();
         let x = document.getElementsByClassName('listobject');
@@ -50,8 +50,6 @@ class SearchProduct extends React.Component {
                 x[i].style.display = "item";
             }
         }
-
-        document.getElementById("searchbar").value = ""
     }
 
 
@@ -153,7 +151,14 @@ class EditProducts extends React.Component {
 
     async updateProduct(event) {
         event.preventDefault();
-        if (this.state.product_title.length > 0 && this.state.ean_number.length > 0) {
+        if (
+            this.state.product_title.length > 0 && 
+            this.state.ean_number.length > 0 &&
+            this.state.product_description.length > 0 &&
+            this.state.price.length > 0 &&
+            this.state.amount_storage.length > 0 &&
+            this.state.expiration_date.length > 0
+            ) {
 
             let productBody = {
                 product_title: this.state.product_title,
@@ -176,16 +181,17 @@ class EditProducts extends React.Component {
                 body: JSON.stringify(productBody)
             })
 
+            
+        this.setState({
+            _id: ""
+        })
+
             document.getElementById("messageError").innerHTML = ""
             document.getElementById("messageAdd").innerHTML = "Product updated!"
         } else {
 
             document.getElementById("messageError").innerHTML = "Title/EAN number must be filled"
         }
-
-        this.setState({
-            _id: ""
-        })
     }
 
     render() {
@@ -213,11 +219,6 @@ class EditProducts extends React.Component {
                                     value={this.state._id}          //prop from parent
                                     onChange={this.handleEvent}     //event listener; call method
                                 />
-                                <p
-                                    hidden
-                                    className="hidden"
-                                    id="id">
-                                </p>
                                 <br /><br />
                                 <input
                                     type="submit"
@@ -306,7 +307,7 @@ class EditProducts extends React.Component {
                             </p>
                             <SearchProduct />
                             <p>
-                                Newest product shown first:
+                                Newest product article shown first:
                             </p>
                             <ListProducts key={this.state._id} />
                         </div>

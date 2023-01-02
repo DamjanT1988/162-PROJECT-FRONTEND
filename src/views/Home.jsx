@@ -14,12 +14,12 @@ class Register extends React.Component {
         };
 
         //bind methods/functions
-        this.handleInputChange = this.handleInputChange.bind(this);
+        this.handleEvent = this.handleEvent.bind(this);
         this.registerUser = this.registerUser.bind(this);
     }
 
     //save the input value and update state
-    handleInputChange(event) {
+    handleEvent(event) {
         const target = event.target;
         const value = target.value;
         const name = target.name;
@@ -121,7 +121,7 @@ class Register extends React.Component {
                         id="nameUser"
                         type="text"
                         value={this.state.nameUser}
-                        onChange={this.handleInputChange} />
+                        onChange={this.handleEvent} />
                 </label>
                 <br />
                 <label>
@@ -132,7 +132,7 @@ class Register extends React.Component {
                         id="emailUser"
                         type="text"
                         value={this.state.emailUser}
-                        onChange={this.handleInputChange} />
+                        onChange={this.handleEvent} />
                 </label>
                 <br />
                 <label>
@@ -143,7 +143,7 @@ class Register extends React.Component {
                         id="passwordUser"
                         type="password"
                         value={this.state.passwordUser}
-                        onChange={this.handleInputChange} />
+                        onChange={this.handleEvent} />
                 </label>
                 <br />
                 <label>
@@ -154,7 +154,7 @@ class Register extends React.Component {
                         id="keyUser"
                         type="password"
                         value={this.state.keyUser}
-                        onChange={this.handleInputChange} />
+                        onChange={this.handleEvent} />
                 </label>
                 <br /><br />
                 <input
@@ -186,12 +186,12 @@ class Login extends React.Component {
         };
 
         //bind methods/functions
-        this.handleInputChange = this.handleInputChange.bind(this);
+        this.handleEvent = this.handleEvent.bind(this);
         this.loginUser = this.loginUser.bind(this);
     }
 
     //save the input value and update state
-    handleInputChange(event) {
+    handleEvent(event) {
         const target = event.target;
         const value = target.value;
         const name = target.name;
@@ -274,7 +274,7 @@ class Login extends React.Component {
                         id="emailUser"
                         type="text"
                         value={this.state.emailUser}
-                        onChange={this.handleInputChange} />
+                        onChange={this.handleEvent} />
                 </label>
                 <br />
                 <label>
@@ -285,7 +285,7 @@ class Login extends React.Component {
                         id="passwordUser"
                         type="password"
                         value={this.state.passwordUser}
-                        onChange={this.handleInputChange} />
+                        onChange={this.handleEvent} />
                 </label>
                 <br /><br />
                 <input
@@ -315,7 +315,7 @@ class StartView extends React.Component {
                     <h2 className='display-4'>LOG IN</h2>
                     <p>
                         Log in below, then navigate through the buttons in top. If no login 
-                        happens, try again with different email/password
+                        happens, try again with different email/password.
                     </p>
                     <Login />
                 </div>
