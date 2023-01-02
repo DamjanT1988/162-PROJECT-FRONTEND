@@ -182,8 +182,6 @@ class AddProducts extends React.Component {
             </div>
           </div>
         </div>
-
-
       )
     }
   }

@@ -47,27 +47,20 @@ class ProductItem extends React.Component {
 
     render() {
         const product = this.props.product;
-
-
         return (
             <article className="listobject">
                 <h3 id="h3title"></h3>
                 <br />
                 <strong>Product title:</strong>
                 <p className="list">{product.product_title}</p>
-
                 <strong>Article number:</strong>
                 <p>{product._id}</p>
-
                 <strong>EAN number:</strong>
                 <p>{product.ean_number}</p>
-
                 <strong>Product description:</strong>
                 <p>{product.product_description}</p>
-
                 <strong>Selling price:</strong>
                 <p>{product.price} kr</p>
-
                 <strong>Amount in storage:</strong>
                 <p id="storage">{product.amount_storage}</p>
                 <input
@@ -76,26 +69,21 @@ class ProductItem extends React.Component {
                     id={product._id}
                     name={product.amount_storage}
                     className="btn btn-light-green lager"
-                    onClick={this.increaseUp}
-                />
+                    onClick={this.increaseUp}/>
                 <input
                     type="button"
                     value="-1 storage"
                     id={product._id}
                     name={product.amount_storage}
                     className="btn btn-light-red lager"
-                    onClick={this.decreaseDown}
-                />
+                    onClick={this.decreaseDown}/>
                 <br /><br />
                 <strong>Expiration date:</strong>
                 <p>{product.expiration_date}</p>
-
                 <strong>Article created:</strong>
                 <p>{product.createdAt}</p>
-
                 <strong>Article updated:</strong>
                 <p>{product.updatedAt}</p>
-
                 <strong>Update version:</strong>
                 <p>{product.__v}</p>
                 <br />
@@ -105,7 +93,6 @@ class ProductItem extends React.Component {
                     className="btn btn-red"
                     id={product._id}
                     onClick={this.deleteProduct} />
-
                 <p id="deletedMessage"></p>
             </article>
         );

@@ -216,6 +216,9 @@ class Login extends React.Component {
                 password: this.state.passwordUser
             };
 
+            //message if not login after 10 seconds
+            setTimeout(() => { document.getElementById("responseLoginFail").innerHTML = "Login fail, try again!"; }, 10000);
+
             //send request to API 
             const resp = await fetch("http://localhost:3000/users/login/", {
                 method: "POST",
@@ -228,7 +231,6 @@ class Login extends React.Component {
                 //convert JS object to JSON object
                 body: JSON.stringify(userBody)
             });
-
 
             //store response
             const data = await resp.json();
@@ -253,8 +255,9 @@ class Login extends React.Component {
             }
 
             //reload page for header to appear, wait 2 seconds
+            //route user to Add view
             setTimeout(() => { window.location.reload(false) }, 2000);
-            window.location = '/Add'
+            setTimeout(() => { window.location = '/Add' }, 2000);
         } else {
             document.getElementById("responseLoginFail").innerHTML = "Empty fields!";
         }
@@ -311,7 +314,8 @@ class StartView extends React.Component {
                 <div className="col-md bg-dark bg-gradient text-white p-4">
                     <h2 className='display-4'>LOG IN</h2>
                     <p>
-                        Log in below, then navigate through the buttons in top.
+                        Log in below, then navigate through the buttons in top. If no login 
+                        happens, try again with different email/password
                     </p>
                     <Login />
                 </div>
