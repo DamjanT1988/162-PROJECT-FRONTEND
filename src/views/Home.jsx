@@ -35,67 +35,80 @@ class Register extends React.Component {
         event.preventDefault();
 
         //check if input
-        
-        if (this.state.emailUser.length > 0 || this.state.emailUser !== undefined) {
-        document.getElementById("responseLoginFail").innerHTML = "";
-        document.getElementById("responseLoginSuccess").innerHTML = "";
+        if (
+            this.state.emailUser.length > 0 &&
+            this.state.emailUser !== undefined &&
+            this.state.nameUser.length > 0 &&
+            this.state.nameUser !== undefined &&
+            this.state.passwordUser.length > 0 &&
+            this.state.passwordUser !== undefined
+        ) {
+            document.getElementById("responseLoginFail").innerHTML = "";
+            document.getElementById("responseLoginSuccess").innerHTML = "";
 
-        //send request to API 
-        const resp = await fetch("http://localhost:3000/keys/", {
-            method: "GET",
-            headers: {
-                "Accept": "application/json",
-                "Content-type": "application/json",
-                "Access-Control-Allow-Origin": 'http://localhost:8080'
-            },
-            mode: 'cors'
-        });
+            //send request to API 
+            const resp = await fetch("http://localhost:3000/keys/", {
+                method: "GET",
+                headers: {
+                    "Accept": "application/json",
+                    "Content-type": "application/json",
+                    "Access-Control-Allow-Origin": 'http://localhost:8080'
+                },
+                mode: 'cors'
+            });
 
-        var data = await resp.json();
+            var data = await resp.json();
 
-        //check if input key macthes with first database key
-        if (data[0].key == this.state.keyUser) {        
+            //check if input key macthes with first database key
+            if (data[0].key == this.state.keyUser) {
 
-        //create a JS object
-        let userBody = {
-            name: this.state.nameUser,
-            email: this.state.emailUser,
-            password: this.state.passwordUser
-        };
+                //create a JS object
+                let userBody = {
+                    name: this.state.nameUser,
+                    email: this.state.emailUser,
+                    password: this.state.passwordUser
+                };
 
-        //send request to API 
-        const resp = await fetch("http://localhost:3000/users/", {
-            method: "POST",
-            headers: {
-                "Accept": "application/json",
-                "Content-type": "application/json",
-                "Access-Control-Allow-Origin": 'http://localhost:8080'
-            },
-            mode: 'cors',
-            //convert JS object to JSON object
-            body: JSON.stringify(userBody)
-        });
+                //send request to API 
+                const resp = await fetch("http://localhost:3000/users/", {
+                    method: "POST",
+                    headers: {
+                        "Accept": "application/json",
+                        "Content-type": "application/json",
+                        "Access-Control-Allow-Origin": 'http://localhost:8080'
+                    },
+                    mode: 'cors',
+                    //convert JS object to JSON object
+                    body: JSON.stringify(userBody)
+                });
 
 
-        //store response
-        const data = await resp.json();
-        const msg = data.message;
+                //store response
+                const data = await resp.json();
+                const msg = data.message;
 
-        if (msg == undefined) {
-            // print message
-            document.getElementById("responseLoginFail2").innerHTML = "Registration fail!";
+                if (msg == undefined) {
+                    // print message
+                    document.getElementById("responseLoginFail2").innerHTML = "Registration fail!";
+                } else {
+                    document.getElementById("responseLoginFail2").innerHTML = "";
+                    document.getElementById("responseLoginSuccess2").innerHTML = "Registration success! Please log in..";
+
+                }
+
+                //clear form
+                document.getElementById("nameUser").value = "";
+                document.getElementById("emailUser").value = "";
+                document.getElementById("passwordUser").value = "";
+                document.getElementById("keyUser").value = "";
+            } else {
+                document.getElementById("responseLoginFail2").innerHTML = "Input correct key!";
+            }
         } else {
-            document.getElementById("responseLoginSuccess2").innerHTML = "Registration success! Please log in..";
-
+            document.getElementById("responseLoginFail2").innerHTML = "";
+            document.getElementById("responseLoginFail2").innerHTML = "Input all fields!";
         }
-
-        //clear form
-        //document.getElementById("nameUser").value = "";
-        //document.getElementById("emailUser").value = "";
-        //document.getElementById("passwordUser").value = "";
-        //document.getElementById("keyUser").value = "";
     }
-        }}
 
     render() {
         return (
@@ -241,6 +254,7 @@ class Login extends React.Component {
 
             //reload page for header to appear, wait 2 seconds
             setTimeout(() => { window.location.reload(false) }, 2000);
+            window.location = '/Add'
         } else {
             document.getElementById("responseLoginFail").innerHTML = "Empty fields!";
         }
@@ -323,7 +337,7 @@ function Home() {
     //View components
     return (
         <div><h1 className='display-3'>START</h1>
-        <StartView />
+            <StartView />
         </div>
     );
 }

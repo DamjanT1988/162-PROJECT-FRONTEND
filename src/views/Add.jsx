@@ -85,10 +85,8 @@ class AddProducts extends React.Component {
 
   render() {
 
-    document.getElementsByClassName="" 
-
     //check if a cookie value exist/logged in user
-    if (document.cookie === 'UserToken=' || document.cookie === '') {
+    if (document.cookie === 'UserToken=' || document.cookie === '' ) {
       window.location = '/';
     } else {
       //render if token has value
