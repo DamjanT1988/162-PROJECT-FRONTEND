@@ -1,12 +1,15 @@
 import React from 'react';
+//import component
 import ListProducts from '../subcomponents/ListProducts';
 
 /*******************************************************************************************/
 // CHILD COMPONENT: ADDPRODUCTS
 
 class AddProducts extends React.Component {
+  //initiate constructor
   constructor(props) {
     super(props);
+
     //set initial state
     this.state = {
       product_title: '',
@@ -34,8 +37,10 @@ class AddProducts extends React.Component {
   }
 
   async addProduct(event) {
+    //prevent reload
     event.preventDefault();
 
+    //check if all fields are filled
     if (
       this.state.product_title.length > 0 && 
       this.state.ean_number.length > 0 &&
@@ -45,6 +50,7 @@ class AddProducts extends React.Component {
       this.state.expiration_date.length > 0
       ) {
 
+      //save variables as body for fetch
       let productBody = {
         product_title: this.state.product_title,
         ean_number: this.state.ean_number,
@@ -54,6 +60,7 @@ class AddProducts extends React.Component {
         expiration_date: this.state.expiration_date,
       };
 
+      //fetch API data
       const resp = await fetch("http://localhost:3000/products/", {
         method: "POST",
         headers: {
@@ -65,9 +72,11 @@ class AddProducts extends React.Component {
         body: JSON.stringify(productBody)
       });
 
+      //clear message and add message
       document.getElementById("messageError").innerHTML = ""
       document.getElementById("messageAdd").innerHTML = "Product added!"
 
+      //clear form
       this.setState({
         id:"",
         product_title: "",
@@ -77,8 +86,13 @@ class AddProducts extends React.Component {
         amount_storage: "",
         expiration_date: ""
       })
-    } else {
 
+      //clear message after 4 seconds
+      setTimeout(() => { document.getElementById("messageError").innerHTML = ""
+      document.getElementById("messageAdd").innerHTML = "" }, 4000);
+
+    } else {
+      //write message
       document.getElementById("messageError").innerHTML = "All fields must be filled"
     }
   }
@@ -90,6 +104,7 @@ class AddProducts extends React.Component {
       window.location = '/';
     } else {
       //render if token has value
+      //return one form and one list components
       return (
         <div>
 
@@ -176,7 +191,7 @@ class AddProducts extends React.Component {
             <div className="col-md bg-dark bg-gradient text-white p-4">
               <h2 className='display-4'>PRODUCT LIST</h2>
               <p>
-                The five latest new products are shown; newest first:
+                The latest new products are shown first:
               </p>
               <ListProducts key={this.state.id} />
             </div>
@@ -195,8 +210,9 @@ class AddProducts extends React.Component {
 /*******************************************************************************************/
 // PARENT COMPONENT: STARTVIEW
 
+//declare class component
 class AddView extends React.Component {
-
+  //render and return one components
   render() {
     return (
       <div><h1 className='display-3'>ADD</h1>
@@ -210,9 +226,10 @@ class AddView extends React.Component {
 // END OF STARTVIEW COMPONENT
 /*******************************************************************************************/
 
+//declare main function
 function Add() {
 
-  //View components
+  //return view components
   return (
     <AddView />
   );

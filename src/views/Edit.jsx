@@ -1,10 +1,12 @@
 import React from 'react';
+//import component
 import ListProducts from '../subcomponents/ListProducts';
 
 /*******************************************************************************************/
 // CHILD COMPONENT: SEARCHPRODUCT
 
 class SearchProduct extends React.Component {
+    //initiate constructor
     constructor(props) {
         super(props);
         //set initial state
@@ -28,31 +30,34 @@ class SearchProduct extends React.Component {
         });
     }
 
-    // 
     async searchProduct(event) {
-
+        //prevent reload
         event.preventDefault();
-
+        
+        //store search word
         let input = this.state.search_word;
 
+        //make stored word to lower cases
         input = input.toLowerCase();
+
+        //store list objects identifier
         let x = document.getElementsByClassName('listobject');
         let i;
 
-        //loopa igenom alla HTML-objekt
+        //loot through all HTML-objects
         for (i = 0; i < x.length; i++) {
-            //göm icke-match
+            //hide non-match objects
             if (!x[i].innerHTML.toLowerCase().includes(input)) {
                 x[i].style.display = "none";
             }
-            //visa matchade
+            //show matched objects
             else {
                 x[i].style.display = "item";
             }
         }
     }
 
-
+    //render and return one form and two buttons
     render() {
         return (
             <div>
@@ -152,13 +157,13 @@ class EditProducts extends React.Component {
     async updateProduct(event) {
         event.preventDefault();
         if (
-            this.state.product_title.length > 0 && 
-            this.state.ean_number.length > 0 &&
-            this.state.product_description.length > 0 &&
-            this.state.price.length > 0 &&
-            this.state.amount_storage.length > 0 &&
-            this.state.expiration_date.length > 0
-            ) {
+            this.state.product_title.length > 0 &&
+            this.state.ean_number.length > 0
+            //this.state.product_description.length > 0 &&
+            //this.state.price.length > 0 &&
+            //this.state.amount_storage.length > 0 && 
+            //this.state.expiration_date.length > 0
+        ) {
 
             let productBody = {
                 product_title: this.state.product_title,
@@ -181,16 +186,28 @@ class EditProducts extends React.Component {
                 body: JSON.stringify(productBody)
             })
 
-            
-        this.setState({
-            _id: ""
-        })
+
+            this.setState({
+                _id: '',
+                product_title: '',
+                ean_number: '',
+                product_description: '',
+                price: '',
+                amount_storage: '',
+                expiration_date: ''
+            })
 
             document.getElementById("messageError").innerHTML = ""
             document.getElementById("messageAdd").innerHTML = "Product updated!"
+            
+            //clear message after 4 seconds
+            setTimeout(() => {
+                document.getElementById("messageError").innerHTML = ""
+                document.getElementById("messageAdd").innerHTML = ""
+            }, 4000);
         } else {
 
-            document.getElementById("messageError").innerHTML = "Title/EAN number must be filled"
+            document.getElementById("messageError").innerHTML = "All fields must be filled"
         }
     }
 
@@ -329,7 +346,7 @@ class EditView extends React.Component {
     render() {
         return (
             <div><h1 className='display-3'>EDIT</h1>
-            <EditProducts />
+                <EditProducts />
             </div>
         )
     }

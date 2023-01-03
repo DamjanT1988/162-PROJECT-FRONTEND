@@ -5,7 +5,9 @@ import Home from "./views/Home";
 import Add from "./views/Add";
 import Edit from "./views/Edit";
 
+//export app
 export default function App() {
+  //use React methods to link view as multi-page solution
   return (
     <BrowserRouter>
       <Routes>
@@ -19,6 +21,7 @@ export default function App() {
   );
 }
 
+//render the app to root element
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <App />

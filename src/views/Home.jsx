@@ -177,6 +177,7 @@ class Register extends React.Component {
 // CHILD COMPONENT: LOGIN
 
 class Login extends React.Component {
+    //initiate constructor
     constructor(props) {
         super(props);
         //set initial state
@@ -259,10 +260,12 @@ class Login extends React.Component {
             setTimeout(() => { window.location.reload(false) }, 2000);
             setTimeout(() => { window.location = '/Add' }, 2000);
         } else {
+            //write of error
             document.getElementById("responseLoginFail").innerHTML = "Empty fields!";
         }
     }
 
+    //render and return JSX code
     render() {
         return (
             <form onSubmit={this.loginUser}>
@@ -307,14 +310,16 @@ class Login extends React.Component {
 /*******************************************************************************************/
 // PARENT COMPONENT: STARTVIEW
 
+//declare class component
 class StartView extends React.Component {
+    //render and return JSX code and two subcomponents
     render() {
         return (
             <div className="row">
                 <div className="col-md bg-dark bg-gradient text-white p-4">
                     <h2 className='display-4'>LOG IN</h2>
                     <p>
-                        Log in below, then navigate through the buttons in top. If no login 
+                        Log in below, then navigate through the buttons in top. If no login
                         happens, try again with different email/password.
                     </p>
                     <Login />
@@ -336,9 +341,10 @@ class StartView extends React.Component {
 // END OF STARTVIEW COMPONENT
 /*******************************************************************************************/
 
+//declare core function
 function Home() {
 
-    //View components
+    //View components, return main component
     return (
         <div><h1 className='display-3'>START</h1>
             <StartView />
