@@ -125,7 +125,7 @@ class ListProducts extends React.Component {
 
         //bind methods/functions
         this.increase = this.increase.bind(this);
-        this.decrease = this.decreasebind(this);
+        this.decrease = this.decrease.bind(this);
     }
 
     //mount on load
