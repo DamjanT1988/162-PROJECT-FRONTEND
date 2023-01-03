@@ -98,6 +98,7 @@ class SearchProduct extends React.Component {
 // CHILD COMPONENT: EDIT
 
 class EditProducts extends React.Component {
+    //initiate constructor
     constructor(props) {
         super(props);
         //set initial state
@@ -128,11 +129,14 @@ class EditProducts extends React.Component {
         });
     }
 
+    //main method
     async getProductsById(event) {
         event.preventDefault();
 
+        //store state value
         const id = this.state._id
 
+        //fetch request to API
         const resp = await fetch("http://localhost:3000/products/" + id, {
             method: "GET",
             headers: {
@@ -141,8 +145,10 @@ class EditProducts extends React.Component {
             }
         })
 
+        //store resp. json data
         const data = await resp.json();
 
+        //set local state values from fetch data
         this.setState({
             _id: data._id,
             product_title: data.product_title,
@@ -154,8 +160,12 @@ class EditProducts extends React.Component {
         })
     }
 
+    //main method
     async updateProduct(event) {
+        //prevent reload
         event.preventDefault();
+
+        //check if empty
         if (
             this.state.product_title.length > 0 &&
             this.state.ean_number.length > 0
@@ -164,7 +174,7 @@ class EditProducts extends React.Component {
             //this.state.amount_storage.length > 0 && 
             //this.state.expiration_date.length > 0
         ) {
-
+            //store state values
             let productBody = {
                 product_title: this.state.product_title,
                 ean_number: this.state.ean_number,
@@ -174,8 +184,10 @@ class EditProducts extends React.Component {
                 expiration_date: this.state.expiration_date,
             };
 
+            //store state value id
             const id = this.state._id
 
+            //fetch request the API
             const resp = await fetch("http://localhost:3000/products/" + id, {
                 method: "PUT",
                 headers: {
@@ -186,7 +198,7 @@ class EditProducts extends React.Component {
                 body: JSON.stringify(productBody)
             })
 
-
+            //clear state values
             this.setState({
                 _id: '',
                 product_title: '',
@@ -197,6 +209,7 @@ class EditProducts extends React.Component {
                 expiration_date: ''
             })
 
+            //print sucess message
             document.getElementById("messageError").innerHTML = ""
             document.getElementById("messageAdd").innerHTML = "Product updated!"
             
@@ -206,11 +219,12 @@ class EditProducts extends React.Component {
                 document.getElementById("messageAdd").innerHTML = ""
             }, 4000);
         } else {
-
+            //print error message
             document.getElementById("messageError").innerHTML = "All fields must be filled"
         }
     }
 
+    //render and return two forms and two components
     render() {
         //check if a cookie value exist/logged in user
         if (document.cookie === 'UserToken=' || document.cookie === '') {
@@ -343,6 +357,7 @@ class EditProducts extends React.Component {
 // PARENT COMPONENT: EDITVIEW
 
 class EditView extends React.Component {
+    //render and return main components
     render() {
         return (
             <div><h1 className='display-3'>EDIT</h1>
@@ -356,9 +371,10 @@ class EditView extends React.Component {
 // END OF STARTVIEW COMPONENT
 /*******************************************************************************************/
 
+//initiate the function
 function Edit() {
 
-    //View components
+    //return component
     return (
         <EditView />
     );

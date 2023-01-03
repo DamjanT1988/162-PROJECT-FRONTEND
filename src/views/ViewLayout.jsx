@@ -1,18 +1,24 @@
-import React from "react";
-import {Outlet} from "react-router-dom";
-import Header from "../viewcomponents/Header";
-import Footer from "../viewcomponents/Footer";
+import React from "react";
+//import router methods for React
+import { Outlet } from "react-router-dom";
+//import header and footer components
+import Header from "../viewcomponents/Header";
+import Footer from "../viewcomponents/Footer";
+//import style files
 import '../style/main.css';
 import '../style/bootstrap.min.css';
 
-const ViewLayout = () => {
-  return (
-    <>
-      <Header />
-      <Outlet />
-      <Footer />
-    </>
-  );
+//save function of layout
+const ViewLayout = () => {
+    //return layout structure
+    return (
+        <>
+            <Header />
+            <Outlet />
+            <Footer />
+        </>
+    );
 };
 
-export default ViewLayout;
+//export variable 
+export default ViewLayout;

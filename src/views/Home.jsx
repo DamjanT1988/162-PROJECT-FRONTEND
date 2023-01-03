@@ -29,12 +29,12 @@ class Register extends React.Component {
         });
     }
 
-    //register a new user
+    //main method
     async registerUser(event) {
         //prevent reload
         event.preventDefault();
 
-        //check if input
+        //check if input fields are empty
         if (
             this.state.emailUser.length > 0 &&
             this.state.emailUser !== undefined &&
@@ -43,6 +43,7 @@ class Register extends React.Component {
             this.state.passwordUser.length > 0 &&
             this.state.passwordUser !== undefined
         ) {
+            //clear messages
             document.getElementById("responseLoginFail").innerHTML = "";
             document.getElementById("responseLoginSuccess").innerHTML = "";
 
@@ -57,6 +58,7 @@ class Register extends React.Component {
                 mode: 'cors'
             });
 
+            //store json resp. data
             var data = await resp.json();
 
             //check if input key macthes with first database key
@@ -85,12 +87,12 @@ class Register extends React.Component {
 
                 //store response
                 const data = await resp.json();
-                const msg = data.message;
 
-                if (msg == undefined) {
-                    // print message
+                if (data.message == undefined) {
+                    //print fail message
                     document.getElementById("responseLoginFail2").innerHTML = "Registration fail!";
                 } else {
+                    //print success message
                     document.getElementById("responseLoginFail2").innerHTML = "";
                     document.getElementById("responseLoginSuccess2").innerHTML = "Registration success! Please log in..";
 
@@ -102,14 +104,17 @@ class Register extends React.Component {
                 document.getElementById("passwordUser").value = "";
                 document.getElementById("keyUser").value = "";
             } else {
+                //print success message
                 document.getElementById("responseLoginFail2").innerHTML = "Input correct key!";
             }
         } else {
+            //print error message
             document.getElementById("responseLoginFail2").innerHTML = "";
             document.getElementById("responseLoginFail2").innerHTML = "Input all fields!";
         }
     }
 
+    //render and return one form
     render() {
         return (
             <form onSubmit={this.registerUser}>
@@ -202,7 +207,7 @@ class Login extends React.Component {
         });
     }
 
-    //log in the user
+    //main method
     async loginUser(event) {
         //prevent reload
         event.preventDefault();

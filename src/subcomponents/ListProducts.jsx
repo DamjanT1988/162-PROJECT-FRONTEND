@@ -4,18 +4,23 @@ import React from 'react';
 // CHILD SUBCOMPONENT: PRODUCTITEM
 
 class ProductItem extends React.Component {
+    //initiate constructor
     constructor(props) {
         super(props);
 
+        //bind methods
         this.increaseUp = this.increaseUp.bind(this);
         this.decreaseDown = this.decreaseDown.bind(this);
         this.deleteProduct = this.deleteProduct.bind(this);
     }
 
+    //method for deletation
     async deleteProduct(e) {
 
+        //store target value id
         var id = e.target.id
 
+        //fetch request API
         const resp = await fetch("http://localhost:3000/products/" + id, {
             method: "DELETE",
             headers: {
@@ -26,25 +31,30 @@ class ProductItem extends React.Component {
             mode: 'cors',
         });
 
+        //print message success
         document.getElementById("deletedMessage").innerHTML = "Article deleted!"
 
         //reload page for header to appear, wait 1 seconds
         setTimeout(() => { window.location.reload(false) }, 1000);
     }
 
-
+    //method for increase storage
     increaseUp(e) {
-
+        //pass data to parent
         this.props.onIncrease(e.target.id, e.target.name);
+        //increase target number by 1
         document.getElementById("storage").innerHTML = ++e.target.name
     }
 
+    //method for decrease storage
     decreaseDown(e) {
-
+        //pass data to parent
         this.props.onDecrease(e.target.id, e.target.name);
+        //decrease target number by 1
         document.getElementById("storage").innerHTML = --e.target.name
     }
 
+    //render and return a list of all products from props data
     render() {
         const product = this.props.product;
         return (
@@ -69,14 +79,14 @@ class ProductItem extends React.Component {
                     id={product._id}
                     name={product.amount_storage}
                     className="btn btn-light-green lager"
-                    onClick={this.increaseUp}/>
+                    onClick={this.increaseUp} />
                 <input
                     type="button"
                     value="-1 storage"
                     id={product._id}
                     name={product.amount_storage}
                     className="btn btn-light-red lager"
-                    onClick={this.decreaseDown}/>
+                    onClick={this.decreaseDown} />
                 <br /><br />
                 <strong>Expiration date:</strong>
                 <p>{product.expiration_date}</p>
@@ -105,18 +115,22 @@ class ProductItem extends React.Component {
 // PARENT SUBCOMPONENT: PRODUCTSLIST
 
 class ListProducts extends React.Component {
+    //initiate constructor
     constructor(props) {
         super(props);
+        //initate an empty array state
         this.state = {
             data: []
         };
 
         //bind methods/functions
         this.increase = this.increase.bind(this);
-        this.decrease = this.decrease.bind(this);
+        this.decrease = this.decreasebind(this);
     }
 
+    //mount on load
     componentDidMount() {
+        //fetch request
         fetch("http://localhost:3000/products/", {
             method: "GET",
             headers: {
@@ -126,23 +140,28 @@ class ListProducts extends React.Component {
             },
             mode: 'cors'
         })
-
+            //manage response data
             .then((response) => response.json())
             .then((data) => {
+                //store data to local state data
                 this.setState({
                     data: data
                 })
             })
     }
 
+    //method to increase storage in database
     async increase(id, amount) {
+        //increase amount by 1
         const amountComp = ++amount;
 
+        //save for body
         let productBody = {
             _id: id,
             amount_storage: amountComp
         };
 
+        //fetch request for API
         const resp = await fetch("http://localhost:3000/products/" + id, {
             method: "PUT",
             headers: {
@@ -154,14 +173,18 @@ class ListProducts extends React.Component {
         })
     }
 
+    //method to decrease storage in database
     async decrease(id, amount) {
+        //decrease amount by 1
         const amountComp = --amount;
 
+        //save for body
         let productBody = {
             _id: id,
             amount_storage: amountComp
         };
 
+        //fetch request
         const resp = await fetch("http://localhost:3000/products/" + id, {
             method: "PUT",
             headers: {
@@ -173,11 +196,16 @@ class ListProducts extends React.Component {
         })
     }
 
+    //render and return a list and a components
     render() {
+        //save empty array
         const list = [];
 
+        //forEach loop for object array from local state
         this.state.data.forEach((product) => {
+            //push list to variable
             list.push(
+                //send/recieve props data to child component
                 <ProductItem
                     product={product}
                     key={product._id}
@@ -188,6 +216,7 @@ class ListProducts extends React.Component {
             )
         })
 
+        //reverse order of list
         list.reverse();
 
         return (
@@ -199,9 +228,10 @@ class ListProducts extends React.Component {
 // END OF PRODUCTSLIST SUBCOMPONENT
 /*******************************************************************************************/
 
+//decklare main function
 function List() {
 
-    //View components
+    //return view component
     return (
         <ListProducts />
     );

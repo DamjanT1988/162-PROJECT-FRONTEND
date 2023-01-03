@@ -36,19 +36,20 @@ class AddProducts extends React.Component {
     });
   }
 
+  //main method
   async addProduct(event) {
     //prevent reload
     event.preventDefault();
 
     //check if all fields are filled
     if (
-      this.state.product_title.length > 0 && 
+      this.state.product_title.length > 0 &&
       this.state.ean_number.length > 0 &&
       this.state.product_description.length > 0 &&
       this.state.price.length > 0 &&
       this.state.amount_storage.length > 0 &&
       this.state.expiration_date.length > 0
-      ) {
+    ) {
 
       //save variables as body for fetch
       let productBody = {
@@ -78,7 +79,7 @@ class AddProducts extends React.Component {
 
       //clear form
       this.setState({
-        id:"",
+        id: "",
         product_title: "",
         ean_number: "",
         product_description: "",
@@ -88,8 +89,10 @@ class AddProducts extends React.Component {
       })
 
       //clear message after 4 seconds
-      setTimeout(() => { document.getElementById("messageError").innerHTML = ""
-      document.getElementById("messageAdd").innerHTML = "" }, 4000);
+      setTimeout(() => {
+        document.getElementById("messageError").innerHTML = ""
+        document.getElementById("messageAdd").innerHTML = ""
+      }, 4000);
 
     } else {
       //write message
@@ -97,10 +100,10 @@ class AddProducts extends React.Component {
     }
   }
 
+  //render and return one form and one component; check cookie
   render() {
-
     //check if a cookie value exist/logged in user
-    if (document.cookie === 'UserToken=' || document.cookie === '' ) {
+    if (document.cookie === 'UserToken=' || document.cookie === '') {
       window.location = '/';
     } else {
       //render if token has value
@@ -216,7 +219,7 @@ class AddView extends React.Component {
   render() {
     return (
       <div><h1 className='display-3'>ADD</h1>
-      <AddProducts />
+        <AddProducts />
       </div>
     )
   }

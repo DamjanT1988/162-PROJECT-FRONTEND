@@ -1,14 +1,14 @@
 import React from 'react';
+//import link method
 import { Link } from "react-router-dom";
 
-//logout
+//logout function component
 function handleLogout() {
     //delete cookie value
     document.cookie = 'UserToken=';
     //hide menu
     document.getElementById("header").innerHTML = "";
 };
-
 
 class Header extends React.Component {
     //on load
@@ -19,13 +19,15 @@ class Header extends React.Component {
         }
     }
 
+    //no return
     render() {
         return false
     }
 }
 
-//main menu
+//main menu function
 function Navbar() {
+    //return the header component and links to voes
     return (
         <header id="header" className="row">
             <div>
