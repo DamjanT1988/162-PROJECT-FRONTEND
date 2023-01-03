@@ -333,12 +333,12 @@ class EditProducts extends React.Component {
                         <div className="col-md bg-dark bg-gradient text-white p-4">
                             <h2 className='display-4'>ALL PRODUCTS VIEW</h2>
                             <p>
-                                Search a product by any key word (like product name or #1 article number) and view the result below; or view the whole list
+                                Search a product by any key word (like product name or article number) and view the result below; or view the whole list
                                 below without search; reload to search the whole list again:
                             </p>
                             <SearchProduct />
                             <p>
-                                Newest product article shown first:
+                                Newest product article shown first
                             </p>
                             <ListProducts key={this.state._id} />
                         </div>
