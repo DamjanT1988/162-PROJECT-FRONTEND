@@ -262,7 +262,6 @@ class Login extends React.Component {
 
             //reload page for header to appear, wait 2 seconds
             //route user to Add view
-            setTimeout(() => { window.location.reload(false) }, 2000);
             setTimeout(() => { window.location = '/Add' }, 2000);
         } else {
             //write of error
