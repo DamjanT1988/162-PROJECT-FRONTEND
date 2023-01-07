@@ -7,6 +7,11 @@ class ProductItem extends React.Component {
     //initiate constructor
     constructor(props) {
         super(props);
+        const product = this.props.product;
+        //initate an empty array state
+        this.state = {
+            amount: product.amount_storage
+        };
 
         //bind methods
         this.increaseUp = this.increaseUp.bind(this);
@@ -40,18 +45,26 @@ class ProductItem extends React.Component {
 
     //method for increase storage
     increaseUp(e) {
+        this.setState({
+            amount: ++e.target.name
+        })
         //pass data to parent
-        this.props.onIncrease(e.target.id, e.target.name);
+        this.props.onIncrease(e.target.id, this.state.amount);
         //increase target number by 1
-        document.getElementById("storage").innerHTML = ++e.target.name
+        document.getElementById("storage").innerHTML = this.state.amount
+
     }
 
     //method for decrease storage
     decreaseDown(e) {
+        this.setState({
+            amount: --e.target.name
+        })
         //pass data to parent
-        this.props.onDecrease(e.target.id, e.target.name);
+        this.props.onDecrease(e.target.id, this.state.amount);
         //decrease target number by 1
-        document.getElementById("storage").innerHTML = --e.target.name
+        document.getElementById("storage").innerHTML = this.state.amount
+
     }
 
     //render and return a list of all products from props data
