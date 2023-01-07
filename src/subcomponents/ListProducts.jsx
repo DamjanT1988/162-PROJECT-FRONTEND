@@ -51,7 +51,7 @@ class ProductItem extends React.Component {
         //pass data to parent
         this.props.onIncrease(e.target.id, this.state.amount);
         //increase target number by 1
-        document.getElementById("storage").innerHTML = this.state.amount
+        document.getElementById("storage").innerHTML = ++this.state.amount
 
     }
 
@@ -63,7 +63,7 @@ class ProductItem extends React.Component {
         //pass data to parent
         this.props.onDecrease(e.target.id, this.state.amount);
         //decrease target number by 1
-        document.getElementById("storage").innerHTML = this.state.amount
+        document.getElementById("storage").innerHTML = --this.state.amount
 
     }
 
