@@ -72,7 +72,6 @@ class ProductItem extends React.Component {
         const product = this.props.product;
         return (
             <article className="listobject">
-                <h3 id="h3title"></h3>
                 <br />
                 <strong>Product title:</strong>
                 <p className="list">{product.product_title}</p>
