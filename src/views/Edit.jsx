@@ -169,10 +169,6 @@ class EditProducts extends React.Component {
         if (
             this.state.product_title.length > 0 &&
             this.state.ean_number.length > 0
-            //this.state.product_description.length > 0 &&
-            //this.state.price.length > 0 &&
-            //this.state.amount_storage.length > 0 && 
-            //this.state.expiration_date.length > 0
         ) {
             //store state values
             let productBody = {
